@@ -32,82 +32,82 @@ static void __clr_bit(uint16_t *val,uint8_t bit)
 // PORT 1
 void sync_ctrl_port1(void)
 {
-	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[0]£»
+	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[0];
 }
 void reset_ctrl_port1(void)
 {
-	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[0]£»
+	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[0];
 }
 
 // PORT 2
 void sync_ctrl_port2(void)
 {
-	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[1]£»
+	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[1];
 }
 void reset_ctrl_port2(void)
 {
-	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[1]£»
+	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[1];
 }
 
 // PORT 3
 void sync_ctrl_port3(void)
 {
-	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[2]£»
+	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[2];
 }
 void reset_ctrl_port3(void)
 {
-	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[2]£»
+	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[2];
 }
 
 // PORT 4
 void sync_ctrl_port4(void)
 {
-	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[3]£»
+	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[3];
 }
 void reset_ctrl_port4(void)
 {
-	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[3]£»
+	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[3];
 }
 
 // PORT 5
 void sync_ctrl_port5(void)
 {
-	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[0]£»
+	GPIOA->ODR=CTRL_MASK|g_gpio_ctrl_table[0];
 }
 void reset_ctrl_port5(void)
 {
-	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[0]£»
+	GPIOA->ODR=CTRL_MASK|gpio_ctrl_table_reset[0]; 
 }
 
 // PORT 6
 void sync_ctrl_port6(void)
 {
-	GPIOI->ODR=CTRL_MASK|g_gpio_ctrl_table[5]£»
+	GPIOI->ODR=CTRL_MASK|g_gpio_ctrl_table[5];
 }
 void reset_ctrl_port6(void)
 {
-	GPIOI->ODR=CTRL_MASK|gpio_ctrl_table_reset[5]£»
+	GPIOI->ODR=CTRL_MASK|gpio_ctrl_table_reset[5];
 }
 
 
 // PORT 7
 void sync_ctrl_port7(void)
 {
-	GPIOJ->ODR=CTRL_MASK|g_gpio_ctrl_table[6]£»
+	GPIOJ->ODR=CTRL_MASK|g_gpio_ctrl_table[6];
 }
 void reset_ctrl_port7(void)
 {
-	GPIOJ->ODR=CTRL_MASK|gpio_ctrl_table_reset[6]£»
+	GPIOJ->ODR=CTRL_MASK|gpio_ctrl_table_reset[6];
 }
 
 // PORT 8
 void sync_ctrl_port8(void)
 {
-	GPIOC->ODR=CTRL_MASK|g_gpio_ctrl_table[7]£»
+	GPIOC->ODR=CTRL_MASK|g_gpio_ctrl_table[7];
 }
 void reset_ctrl_port8(void)
 {
-	GPIOC->ODR=CTRL_MASK|gpio_ctrl_table_reset[7]£»
+	GPIOC->ODR=CTRL_MASK|gpio_ctrl_table_reset[7]; 
 }
 
 void gpio_convert_all(void)

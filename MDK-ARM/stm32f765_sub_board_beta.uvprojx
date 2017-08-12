@@ -312,7 +312,7 @@
           <Cads>
             <interw>1</interw>
             <Optim>4</Optim>
-            <oTime>0</oTime>
+            <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
             <Strict>0</Strict>
@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F765xx</Define>
+              <Define>USE_HAL_DRIVER,STM32F765xx,DEBUG</Define>
               <Undefine></Undefine>
               <IncludePath>../Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include;../User</IncludePath>
             </VariousControls>
@@ -553,17 +553,22 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>API/BSP</GroupName>
+          <GroupName>API/User</GroupName>
           <Files>
+            <File>
+              <FileName>sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\sdram.c</FilePath>
+            </File>
             <File>
               <FileName>bsp_qspi_n25q.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\bsp_qspi_n25q.c</FilePath>
             </File>
             <File>
-              <FileName>sdram.c</FileName>
+              <FileName>uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\sdram.c</FilePath>
+              <FilePath>..\User\uart.c</FilePath>
             </File>
             <File>
               <FileName>spi_handle.c</FileName>
@@ -571,9 +576,14 @@
               <FilePath>..\User\spi_handle.c</FilePath>
             </File>
             <File>
-              <FileName>uart.c</FileName>
+              <FileName>cmd_handle.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\uart.c</FilePath>
+              <FilePath>..\User\cmd_handle.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio_handle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\gpio_handle.c</FilePath>
             </File>
           </Files>
         </Group>

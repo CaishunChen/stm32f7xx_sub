@@ -46,7 +46,12 @@
 #include "fmc.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "bsp_qspi_n25q.h"
+#include "sdram.h"
+#include "gpio_handle.h"
+#include "cmd_handle.h"
+#include "spi_handle.h"
+#include "uart.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
