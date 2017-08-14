@@ -58,7 +58,11 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+#ifdef DEBUG
+#define DBG_LOG(x) printf x
+#else
+#define DBG_LOG(x) 
+#endif
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -116,7 +120,18 @@ int main(void)
   MX_NVIC_Init();
 
   /* USER CODE BEGIN 2 */
+  SDRAM_Initialization_Sequence(&hsdram1);
+  fsmc_sdram_test();
 
+	if(QSPI_UserInit() == 0)
+	{
+		DBG_LOG(("flash init ok\r\n"));
+	}
+  
+  //reset_ctrl_all();
+  
+  DBG_LOG(("sys init ok\r\n"));
+	g_gpio_ctrl_table_raw[0].a = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -124,7 +139,20 @@ int main(void)
   while (1)
   {
   /* USER CODE END WHILE */
-
+	g_gpio_ctrl_table_raw[0].a += 500;
+  g_gpio_ctrl_table_raw[0].p += 5625;
+	if(g_gpio_ctrl_table_raw[0].a >= 64000)
+	{
+		g_gpio_ctrl_table_raw[0].a = 0;
+	}
+	if(g_gpio_ctrl_table_raw[0].p >= 360000)
+	{
+		g_gpio_ctrl_table_raw[0].p = 0;
+	}
+	DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
+	gpio_convert_all();
+	sync_ctrl_all();
+	HAL_Delay(100);
   /* USER CODE BEGIN 3 */
 
   }

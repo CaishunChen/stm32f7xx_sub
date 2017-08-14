@@ -412,7 +412,8 @@ QSPI_StaticTypeDef QSPI_Quad_Enter(void)
     return QSPI_ERROR;
   }  
   
-  if(_RegVal[0] == 0xff)   // 芯片初始值 = 0xDF
+	DBG_LOG(("_RegVal[0] is %.2X\r\n",_RegVal[0]));
+  if(_RegVal[0] == 0xFF)   // 芯片初始值 = 0xDF
   {
     _RegVal[0] = 0x2F;   // bit7=0,bit6=1 QUAD 模式, bit5 系统保留且必须设置为0///guangqiang 此处需调试
     if(QSPI_Write_SR(QSPI_WRITE_ENHANCED_VOL_CFG_REG_CMD, _RegVal[0], 1) == QSPI_OK)  // 设置为 QUAD 模式 reg 0x61
