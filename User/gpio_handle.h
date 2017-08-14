@@ -4,6 +4,12 @@
 #include <stdint.h>
 #include "stm32f7xx.h"
 
+typedef struct 
+{
+	uint32_t a;
+	uint32_t p;
+}type_gpio_ctrl;
+
 void sync_ctrl_port1(void);
 void reset_ctrl_port1(void);
 void sync_ctrl_port2(void);
@@ -21,8 +27,10 @@ void reset_ctrl_port7(void);
 void sync_ctrl_port8(void);
 void reset_ctrl_port8(void);
 
+
+void reset_ctrl_all(void);
 void gpio_convert_all(void);
-void gpio_convert_one(uint8_t *sdat,uint16_t *ddat);
+void gpio_convert_one(type_gpio_ctrl *sdat,uint16_t *ddat);
 
 
 
