@@ -39,92 +39,95 @@ static void __clr_bit(uint16_t *val,uint8_t bit)
 // PORT 1  PA  PB5
 void sync_ctrl_port1(void)
 {
-	//GPIOB->BSRR = GPIO_PIN_5;//set
-	__delay();
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[0];
+	GPIOB->BSRR = GPIO_PIN_5;//set
+	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_5 << 16;//reset
 	
 }
 void reset_ctrl_port1(void)
 {	
-	GPIOB->BSRR = (uint32_t)(GPIO_PIN_5 << 16);//set
-	__delay();
 	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[0];
+	GPIOB->BSRR = (uint32_t)GPIO_PIN_5 << 16;//set
+	__delay();
 	GPIOB->BSRR = GPIO_PIN_5;//reset
 }
 
 // PORT 2 PA  PB6
 void sync_ctrl_port2(void)
 {
-	GPIOB->BSRR = (uint32_t)(GPIO_PIN_6 << 16);//set
-	__delay();
+	
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[1];
+	GPIOB->BSRR = (uint32_t)GPIO_PIN_6 << 16;//set
+	__delay();
 	GPIOB->BSRR = GPIO_PIN_6;//reset
 }
 void reset_ctrl_port2(void)
 {
-	GPIOB->BSRR = (uint32_t)(GPIO_PIN_6 << 16);//set
-	__delay();
 	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[1];
+	GPIOB->BSRR = (uint32_t)GPIO_PIN_6 << 16;//set
+	__delay();
 	GPIOB->BSRR = GPIO_PIN_6;//reset
 }
 
 // PORT 3 PA  PB7
 void sync_ctrl_port3(void)
 {
-	GPIOB->BSRR = (uint32_t)(GPIO_PIN_7 << 16);//set
-	__delay();
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[2];
+	GPIOB->BSRR = (uint32_t)GPIO_PIN_7 << 16;//set
+	__delay();
 	GPIOB->BSRR = GPIO_PIN_7;//reset
 }
 void reset_ctrl_port3(void)
 {
-	GPIOB->BSRR = (uint32_t)(GPIO_PIN_7 << 16);//set
-	__delay();
 	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[2];
+	GPIOB->BSRR = (uint32_t)GPIO_PIN_7 << 16;//set
+	__delay();
 	GPIOB->BSRR = GPIO_PIN_7;//reset
 }
 
 // PORT 4 PA  PB8
 void sync_ctrl_port4(void)
 {
-	GPIOB->BSRR = (uint32_t)(GPIO_PIN_8 << 16);//set
-	__delay();
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[3];
+	GPIOB->BSRR = (uint32_t)GPIO_PIN_8 << 16;//set
+	__delay();
 	GPIOB->BSRR = GPIO_PIN_8;//reset
 }
 void reset_ctrl_port4(void)
 {
+	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[3];
 	GPIOB->BSRR = (uint32_t)(GPIO_PIN_8 << 16);//set
 	__delay();
-	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[3];
 	GPIOB->BSRR = GPIO_PIN_8;//reset
 }
 
 // PORT 5 PA  PB9
 void sync_ctrl_port5(void)
 {
+	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[4];
 	GPIOB->BSRR = (uint32_t)(GPIO_PIN_9 << 16);//set
 	__delay();
-	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[4];
 	GPIOB->BSRR = GPIO_PIN_5;//reset
 }
 void reset_ctrl_port5(void)
 {
+	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[4]; 
 	GPIOB->BSRR = (uint32_t)(GPIO_PIN_9 << 16);//set
 	__delay();
-	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[4]; 
 	GPIOB->BSRR = GPIO_PIN_9;//reset
 }
 
 // PORT 6
 void sync_ctrl_port6(void)
 {
-	GPIOI->ODR=CTRL_MASK&g_gpio_ctrl_table[5];
+	//GPIOI->ODR=CTRL_MASK&g_gpio_ctrl_table[5];
+	DBG_LOG(("GPIOI output %.4X\r\n",CTRL_MASK&g_gpio_ctrl_table[5]));
 }
 void reset_ctrl_port6(void)
 {
-	GPIOI->ODR=CTRL_MASK&gpio_ctrl_table_reset[5];
+	//GPIOI->ODR=CTRL_MASK&gpio_ctrl_table_reset[5];
+	DBG_LOG(("GPIOI reset %.4X\r\n",CTRL_MASK&gpio_ctrl_table_reset[5]));
 }
 
 

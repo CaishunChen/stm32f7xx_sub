@@ -120,6 +120,7 @@ int main(void)
   MX_NVIC_Init();
 
   /* USER CODE BEGIN 2 */
+	#if 0
   SDRAM_Initialization_Sequence(&hsdram1);
   fsmc_sdram_test();
 
@@ -129,7 +130,8 @@ int main(void)
 	}
   
   //reset_ctrl_all();
-  
+  #endif
+	
   DBG_LOG(("sys init ok\r\n"));
 	g_gpio_ctrl_table_raw[0].a = 0;
   /* USER CODE END 2 */
@@ -139,7 +141,7 @@ int main(void)
   while (1)
   {
   /* USER CODE END WHILE */
-	g_gpio_ctrl_table_raw[0].a += 500;
+  g_gpio_ctrl_table_raw[0].a += 500;
   g_gpio_ctrl_table_raw[0].p += 5625;
 	if(g_gpio_ctrl_table_raw[0].a >= 64000)
 	{

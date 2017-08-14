@@ -1,4 +1,5 @@
-
+# source insight  #
+###################
 SI/
 
 # Compiled source #
@@ -11,6 +12,13 @@ SI/
 *.d
 *.crf
 *.so
+
+# Docs   #
+##########
+*.pdf
+*.doc
+*.docx
+*.
 
 # Packages #
 ############
