@@ -134,6 +134,11 @@ int main(void)
 	
   DBG_LOG(("sys init ok\r\n"));
 	g_gpio_ctrl_table_raw[0].a = 0;
+	g_gpio_ctrl_table_raw[1].a = 0;
+	gpio_convert_all();
+	sync_ctrl_all();
+	HAL_Delay(5000);
+	DBG_LOG(("set 0 ok\r\n"));
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -142,19 +147,21 @@ int main(void)
   {
   /* USER CODE END WHILE */
   g_gpio_ctrl_table_raw[0].a += 500;
-  g_gpio_ctrl_table_raw[0].p += 5625;
-	if(g_gpio_ctrl_table_raw[0].a >= 64000)
+	g_gpio_ctrl_table_raw[1].a += 500;
+  //g_gpio_ctrl_table_raw[0].p += 5625;
+	if(g_gpio_ctrl_table_raw[0].a >= 63000)
 	{
 		g_gpio_ctrl_table_raw[0].a = 0;
+		g_gpio_ctrl_table_raw[1].a = 0;
 	}
-	if(g_gpio_ctrl_table_raw[0].p >= 360000)
-	{
-		g_gpio_ctrl_table_raw[0].p = 0;
-	}
+//	if(g_gpio_ctrl_table_raw[0].p >= 360000)
+//	{
+//		g_gpio_ctrl_table_raw[0].p = 0;
+//	}
 	DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
 	gpio_convert_all();
 	sync_ctrl_all();
-	HAL_Delay(100);
+	HAL_Delay(500);
   /* USER CODE BEGIN 3 */
 
   }

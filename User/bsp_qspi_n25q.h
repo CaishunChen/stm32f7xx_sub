@@ -37,7 +37,7 @@ Bulk ERASE cycle time                  |     240        480       |      s
 
 /* mt25q1gb Micron memory   #define QSPI_FLASH_SIZE			25 */
 
- #define QSPI_FLASH_SIZE			26
+#define QSPI_FLASH_SIZE			26
 
 #define QSPI_FLASH_SIZE_LINE		(POSITION_VAL(QSPI_MT25Q1GB_TOTAL_SIZE)-1)  /* 
                                                            * QSPI FLASH大小，	使用二进制位数的个数表示，N25Q512A大小为64M字节
