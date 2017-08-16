@@ -154,18 +154,66 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>61</LineNumber>
+          <LineNumber>169</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134230912</Address>
+          <Address>134233842</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\绔ュ厜寮?2017-08\NV\stm32f765_sub_board_beta\User\gpio_handle.c</Filename>
+          <Filename>E:\绔ュ厜寮?2017-08\NV\stm32f765_sub_board_beta\Src\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\stm32f765_sub_board_beta\../User/gpio_handle.c\61</Expression>
+          <Expression>\\stm32f765_sub_board_beta\../Src/main.c\169</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>151</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233802</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\绔ュ厜寮?2017-08\NV\stm32f765_sub_board_beta\Src\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\stm32f765_sub_board_beta\../Src/main.c\151</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>149</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233778</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\绔ュ厜寮?2017-08\NV\stm32f765_sub_board_beta\Src\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\stm32f765_sub_board_beta\../Src/main.c\149</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>145</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134233772</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\绔ュ厜寮?2017-08\NV\stm32f765_sub_board_beta\Src\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\stm32f765_sub_board_beta\../Src/main.c\145</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -694,6 +742,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\User\gpio_handle.c</PathWithFileName>
       <FilenameWithoutPath>gpio_handle.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>5</GroupNumber>
+      <FileNumber>38</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\User\flash_handle.c</PathWithFileName>
+      <FilenameWithoutPath>flash_handle.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

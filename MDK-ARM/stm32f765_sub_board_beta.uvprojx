@@ -621,6 +621,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\gpio_handle.c</FilePath>
             </File>
+            <File>
+              <FileName>flash_handle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\flash_handle.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

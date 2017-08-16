@@ -15,8 +15,8 @@ const uint16_t gpio_ctrl_table_reset[8]={0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
 uint16_t g_gpio_ctrl_table[8]={0};
 type_gpio_ctrl g_gpio_ctrl_table_raw[8]={0};
 
-static void __set_bit(uint16_t *val,uint8_t bit);
-static void __clr_bit(uint16_t *val,uint8_t bit);
+static void __set_bit(uint16_t *val,uint16_t bit);
+static void __clr_bit(uint16_t *val,uint16_t bit);
 static __IO void __delay(void);
 
 
@@ -26,12 +26,12 @@ static __IO void __delay(void)
 	while(i--);
 }
 
-static void __set_bit(uint16_t *val,uint8_t bit)
+static void __set_bit(uint16_t *val,uint16_t bit)
 {
 	*val |= (1 << bit);
 }
 
-static void __clr_bit(uint16_t *val,uint8_t bit)
+static void __clr_bit(uint16_t *val,uint16_t bit)
 {
 	*val &= ~(1 << bit);
 }
@@ -175,7 +175,7 @@ void gpio_convert_one(type_gpio_ctrl *sdat,uint16_t *ddat)
 
 	//__clr_bit(&res,11);
 
-	if(temp_a >= 31500)	{temp_a -=31500;__set_bit(&res,12);DBG_LOG(("\t\t\tset bit12\r\n"));}
+	if(temp_a >= 31500)	{temp_a -=31500;__set_bit(&res,12);}//DBG_LOG(("\t\t\tset bit12\r\n"));
 	if(temp_a >= 16000)	{temp_a -=16000;__set_bit(&res,0);}
 	if(temp_a >= 8000)	{temp_a -=8000;	__set_bit(&res,11);}
 	if(temp_a >= 4000)	{temp_a -=4000;	__set_bit(&res,9);}
