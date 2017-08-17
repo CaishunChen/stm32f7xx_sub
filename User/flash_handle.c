@@ -31,8 +31,8 @@ typedef enum
 #define AMPLITUDE_STEP 					(500)
 #define PHASE_STEP 							(5625)
 
-#define AMPLITUDE_STORE_SIZE  	(0x7F)
-#define PHASE_STORE_SIZE			 	(0x3F)
+#define AMPLITUDE_STORE_SIZE  	(0x80*3) //128*3
+#define PHASE_STORE_SIZE			 	(0x40*3) //64*3
 #define AMPLITUDE_STORE_OFFSET 	(0x0000)
 #define PHASE_STORE_OFFSET			(0x1000)
 

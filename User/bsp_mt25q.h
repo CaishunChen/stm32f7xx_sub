@@ -1,5 +1,5 @@
-#ifndef  __BSP_QSPI_N25Q_H
-#define  __BSP_QSPI_N25Q_H
+#ifndef  __bsp_mt25q_H
+#define  __bsp_mt25q_H
 
 
 

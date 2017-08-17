@@ -1,10 +1,16 @@
-#include "sdram.h"
+#include "sdram_handle.h"
+#include "flash_handle.h"
 
 #ifdef DEBUG
 #define DBG_LOG(x) printf x
 #else
 #define DBG_LOG(x) 
 #endif
+
+
+//global
+AmplitudeDataTypeDef g_amplitude_tab[7][8]={0};
+PhaseDataTypeDef g_phase_tab[7][8]={0};
 
 static volatile void delay(uint32_t t);
 
@@ -163,3 +169,10 @@ void sdram_rw_test(void)
 		base=base+256;
 	}
 }
+
+QSPI_StaticTypeDef flash2mem(void)
+{
+	DBG_LOG(("enter flash to mem\r\n"));
+}
+
+

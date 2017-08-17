@@ -46,8 +46,8 @@
 #include "fmc.h"
 
 /* USER CODE BEGIN Includes */
-#include "bsp_qspi_n25q.h"
-#include "sdram.h"
+#include "bsp_mt25q.h"
+#include "sdram_handle.h"
 #include "gpio_handle.h"
 #include "cmd_handle.h"
 #include "spi_handle.h"
@@ -126,7 +126,7 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
 	
-	#if 1
+	#if 0
   SDRAM_Initialization_Sequence(&hsdram1);
   fsmc_sdram_test();
 
@@ -145,20 +145,20 @@ int main(void)
 	for(i=0;i<64;i++){t1[i]=i;printf("t1[%d]=%d\r\n",i,t1[i]);};
 	printf("init t t1\r\n");
 	flash_write(1,1,t,t1);
-	#endif
+//	#endif
 	flash_read(1,1,r,r1);
 	for(i=0;i<128;i++)printf("r[%d]=%d\r\n",i,r[i]);
 	printf("\r\n");
 	for(i=0;i<64;i++)printf("r1[%d]=%d\r\n",i,r1[i]);
-	//#endif
+	#endif
 	
 	g_gpio_ctrl_table_raw[0].a = 0;
 	g_gpio_ctrl_table_raw[1].a = 0;
+	
 //	gpio_convert_all();
 //	sync_ctrl_all();
 //	HAL_Delay(5000);
 //	DBG_LOG(("set 0 ok\r\n"));
-	
 	
   /* USER CODE END 2 */
 
@@ -183,11 +183,11 @@ int main(void)
 //	gpio_convert_all();
 //	sync_ctrl_all();
 	
-//	GPIOA->ODR= 0;//0xfff;
-//	GPIOB->BSRR = GPIO_PIN_5;//set
-//	HAL_Delay(1);
-//	GPIOB->BSRR = (uint32_t)GPIO_PIN_5 << 16;//reset
-	HAL_Delay(1000);
+		GPIOA->ODR=0x1FFF;
+		//GPIOB->BSRR = 0xFFFF;//set
+		HAL_Delay(1);
+		//GPIOA->BSRR = (uint32_t)GPIO_PIN_11 << 16;//reset
+		HAL_Delay(1000);
   /* USER CODE BEGIN 3 */
 
   }

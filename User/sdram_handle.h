@@ -1,8 +1,20 @@
-#ifndef _SDRAM_H
-#define _SDRAM_H
+#ifndef _sdram_handle_H
+#define _sdram_handle_H
 
 #include "stm32f7xx.h"
 #include <stdint.h>
+
+
+typedef struct
+{
+	uint32_t stand_val;
+	uint32_t actual_val;
+	uint32_t calibration_val;
+}DataStoreTypeDef;
+
+typedef DataStoreTypeDef AmplitudeDataTypeDef;
+typedef DataStoreTypeDef PhaseDataTypeDef;
+
 	
 extern SDRAM_HandleTypeDef hsdram1;//SDRAM¾ä±ú
 #define Bank5_SDRAM_ADDR    ((uint32_t)(0XC0000000)) //SDRAM¿ªÊ¼µØÖ·

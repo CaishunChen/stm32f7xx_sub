@@ -47,7 +47,7 @@ QPP              四IO页编程命令，CMD=32或38        命令通过D0发出，数据通过D0[3:
 #define DBG_LOG(x) 
 #endif
 
-#include "bsp_qspi_n25q.h"
+#include "bsp_mt25q.h"
 #include "quadspi.h"
 
 QSPI_Information  _QspiFlashInf;

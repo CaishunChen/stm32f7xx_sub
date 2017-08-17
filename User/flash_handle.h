@@ -3,7 +3,7 @@
 
 #include "stdint.h"
 #include "stm32f7xx.h"
-#include "bsp_qspi_n25q.h"
+#include "bsp_mt25q.h"
 
 
 #ifdef DEBUG

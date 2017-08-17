@@ -10,6 +10,7 @@
       <TargetName>stm32f765_sub_board_beta</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pArmCC>5060061::V5.06 update 1 (build 61)::ARMCC</pArmCC>
       <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
@@ -592,16 +593,6 @@
           <GroupName>API/User</GroupName>
           <Files>
             <File>
-              <FileName>sdram.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\sdram.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_qspi_n25q.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\bsp_qspi_n25q.c</FilePath>
-            </File>
-            <File>
               <FileName>uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\uart.c</FilePath>
@@ -625,6 +616,16 @@
               <FileName>flash_handle.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\flash_handle.c</FilePath>
+            </File>
+            <File>
+              <FileName>sdram_handle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\sdram_handle.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_mt25q.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_mt25q.c</FilePath>
             </File>
           </Files>
         </Group>
