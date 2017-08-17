@@ -139,26 +139,21 @@ int main(void)
   DBG_LOG(("sys init ok\r\n"));
 	
 	print_all_address();
-	//if(QSPI_EraseChip() != 0)printf("erase err\r\n");
+
 	#if 0
-	for(i=0;i<128;i++){t[i]=i;printf("t[%d]=%d\r\n",i,t[i]);};
-	for(i=0;i<64;i++){t1[i]=i;printf("t1[%d]=%d\r\n",i,t1[i]);};
-	printf("init t t1\r\n");
-	flash_write(1,1,t,t1);
-//	#endif
-	flash_read(1,1,r,r1);
-	for(i=0;i<128;i++)printf("r[%d]=%d\r\n",i,r[i]);
-	printf("\r\n");
-	for(i=0;i<64;i++)printf("r1[%d]=%d\r\n",i,r1[i]);
+//	for(i=0;i<128;i++){t[i]=i;printf("t[%d]=%d\r\n",i,t[i]);};
+//	for(i=0;i<64;i++){t1[i]=i;printf("t1[%d]=%d\r\n",i,t1[i]);};
+//	printf("init t t1\r\n");
+//	flash_write(1,1,t,t1)
+//	flash_read(1,1,r,r1);
+//	for(i=0;i<128;i++)printf("r[%d]=%d\r\n",i,r[i]);
+//	printf("\r\n");
+//	for(i=0;i<64;i++)printf("r1[%d]=%d\r\n",i,r1[i]);
 	#endif
 	
 	g_gpio_ctrl_table_raw[0].a = 0;
-	g_gpio_ctrl_table_raw[1].a = 0;
+	g_gpio_ctrl_table_raw[5].a = 0;
 	
-//	gpio_convert_all();
-//	sync_ctrl_all();
-//	HAL_Delay(5000);
-//	DBG_LOG(("set 0 ok\r\n"));
 	
   /* USER CODE END 2 */
 
@@ -167,27 +162,37 @@ int main(void)
   while (1)
   {
   /* USER CODE END WHILE */
-  g_gpio_ctrl_table_raw[0].a += 1000;
-	g_gpio_ctrl_table_raw[1].a += 1000;
-  //g_gpio_ctrl_table_raw[0].p += 5625;
+  g_gpio_ctrl_table_raw[0].a += 500;
+	g_gpio_ctrl_table_raw[5].a += 500;
+	g_gpio_ctrl_table_raw[6].a += 500;
+	g_gpio_ctrl_table_raw[7].a += 500;
+		
+	g_gpio_ctrl_table_raw[0].p += 5625;
+	g_gpio_ctrl_table_raw[5].p += 5625;
+	g_gpio_ctrl_table_raw[6].p += 5625;
+	g_gpio_ctrl_table_raw[7].p += 5625;
+
 	if(g_gpio_ctrl_table_raw[0].a >= 63000)
 	{
 		g_gpio_ctrl_table_raw[0].a = 0;
-		g_gpio_ctrl_table_raw[1].a = 0;
+		g_gpio_ctrl_table_raw[5].a = 0;
+		g_gpio_ctrl_table_raw[6].a = 0;
+		g_gpio_ctrl_table_raw[7].a = 0;
+		
 	}
-//	if(g_gpio_ctrl_table_raw[0].p >= 360000)
-//	{
-//		g_gpio_ctrl_table_raw[0].p = 0;
-//	}
-//	DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
-//	gpio_convert_all();
-//	sync_ctrl_all();
+	if(g_gpio_ctrl_table_raw[0].p >= 360000)
+	{
+		g_gpio_ctrl_table_raw[0].p = 0;
+		g_gpio_ctrl_table_raw[5].p = 0;
+		g_gpio_ctrl_table_raw[6].p = 0;
+		g_gpio_ctrl_table_raw[7].p = 0;
+	}
 	
-		GPIOA->ODR=0x1FFF;
-		//GPIOB->BSRR = 0xFFFF;//set
-		HAL_Delay(1);
-		//GPIOA->BSRR = (uint32_t)GPIO_PIN_11 << 16;//reset
-		HAL_Delay(1000);
+	DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
+	gpio_convert_all();
+	sync_ctrl_all();
+
+		HAL_Delay(200);
   /* USER CODE BEGIN 3 */
 
   }

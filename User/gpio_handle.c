@@ -120,12 +120,16 @@ void reset_ctrl_port5(void)
 // PORT 6
 void sync_ctrl_port6(void)
 {
-	//GPIOI->ODR=CTRL_MASK&g_gpio_ctrl_table[5];
+	GPIOI->ODR=CTRL_MASK&g_gpio_ctrl_table[5];
+	if(g_gpio_ctrl_table[5]&0x04) GPIOE->BSRR= GPIO_PIN_2;else GPIOE->BSRR= (uint32_t)GPIO_PIN_2<< 16;
+	if(g_gpio_ctrl_table[5]&0x10) GPIOE->BSRR= GPIO_PIN_4;else GPIOE->BSRR= (uint32_t)GPIO_PIN_4<< 16;
 	DBG_LOG(("GPIOI output %.4X\r\n",CTRL_MASK&g_gpio_ctrl_table[5]));
 }
 void reset_ctrl_port6(void)
 {
-	//GPIOI->ODR=CTRL_MASK&gpio_ctrl_table_reset[5];
+	GPIOI->ODR=CTRL_MASK&gpio_ctrl_table_reset[5];
+	if(g_gpio_ctrl_table[5]&0x04) GPIOE->BSRR= GPIO_PIN_2;else GPIOE->BSRR= (uint32_t)GPIO_PIN_2<< 16;
+	if(g_gpio_ctrl_table[5]&0x10) GPIOE->BSRR= GPIO_PIN_4;else GPIOE->BSRR= (uint32_t)GPIO_PIN_4<< 16;
 	DBG_LOG(("GPIOI reset %.4X\r\n",CTRL_MASK&gpio_ctrl_table_reset[5]));
 }
 
@@ -188,7 +192,7 @@ void gpio_convert_one(type_gpio_ctrl *sdat,uint16_t *ddat)
 	//RAW				180			45		5.625	11.25	22.5	90
 	//cal				180000	45000	5625	11250	22500	90000
 	//ctrl_bit	8				7			6			5			4			3	
-	if(temp_p >= 180000){temp_p -= 18000;__clr_bit(&res,8);}
+	if(temp_p >= 180000){temp_p -= 180000;__clr_bit(&res,8);}
 	if(temp_p >= 90000)	{temp_p -= 90000;__clr_bit(&res,3);}
 	if(temp_p >= 45000)	{temp_p -= 45000;__clr_bit(&res,7);}
 	if(temp_p >= 22500)	{temp_p -= 22500;__clr_bit(&res,4);}

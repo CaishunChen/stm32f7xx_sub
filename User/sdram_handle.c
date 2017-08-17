@@ -1,5 +1,4 @@
 #include "sdram_handle.h"
-#include "flash_handle.h"
 
 #ifdef DEBUG
 #define DBG_LOG(x) printf x
@@ -9,8 +8,8 @@
 
 
 //global
-AmplitudeDataTypeDef g_amplitude_tab[7][8]={0};
-PhaseDataTypeDef g_phase_tab[7][8]={0};
+AmplitudeDataTypeDef g_amplitude_tab[8]={0};
+PhaseDataTypeDef g_phase_tab[8]={0};
 
 static volatile void delay(uint32_t t);
 
@@ -170,9 +169,26 @@ void sdram_rw_test(void)
 	}
 }
 
-QSPI_StaticTypeDef flash2mem(void)
+
+// to flash_handle.c
+//#define MAX_CHANNEL 						(8)
+//#define MAX_FREQ 								(7)
+
+QSPI_StaticTypeDef flash2mem(uint8_t freq)
 {
+	uint8_t i;
+	QSPI_StaticTypeDef sta=0xFF;
 	DBG_LOG(("enter flash to mem\r\n"));
+	for(i=0;i<MAX_CHANNEL;i++)
+	{
+		sta =flash_read(freq,i,(uint8_t *)(&g_amplitude_tab[i]),(uint8_t *)(&g_phase_tab[i]));
+		if( sta != QSPI_OK)
+		{
+			DBG_LOG(("flash to mem error channel %d \r\n",i));
+			return sta;
+		}
+	}
+	return QSPI_OK;
 }
 
 

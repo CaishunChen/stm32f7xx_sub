@@ -3,7 +3,8 @@
 
 #include "stm32f7xx.h"
 #include <stdint.h>
-
+#include "flash_handle.h"
+#include "bsp_mt25q.h"
 
 typedef struct
 {
@@ -39,4 +40,8 @@ void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram);
 void fsmc_sdram_test(void);
 void read_write_test(uint32_t base);
 void sdram_rw_test(void);
+QSPI_StaticTypeDef flash2mem(uint8_t freq);
+
+
 #endif
+
