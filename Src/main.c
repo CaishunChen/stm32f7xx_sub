@@ -115,7 +115,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_SPI2_Init();
+  //MX_SPI2_Init();
   MX_FMC_Init();
   MX_UART4_Init();
   MX_TIM14_Init();
@@ -190,8 +190,8 @@ int main(void)
 	DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
 	gpio_convert_all();
 	sync_ctrl_all();
-
-	HAL_Delay(200);
+	//HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_12|GPIO_PIN_11);
+	HAL_Delay(2000);
 
   }
   /* USER CODE END 3 */
