@@ -22,7 +22,7 @@ static __IO void __delay(void);
 
 static __IO void __delay(void)
 {
-	__IO uint32_t i=0x1000;//0x100 1us 
+	__IO uint32_t i=0x100;//0x100 1us 
 	while(i--);
 }
 
@@ -177,9 +177,8 @@ void gpio_convert_one(type_gpio_ctrl *sdat,uint16_t *ddat)
 	uint32_t temp_p=sdat->p;
 	uint16_t res=0x01F8;
 
-	//__clr_bit(&res,11);
 
-	if(temp_a >= 31500)	{temp_a -=31500;__set_bit(&res,12);}//DBG_LOG(("\t\t\tset bit12\r\n"));
+	if(temp_a >= 31500)	{temp_a -=31500;__set_bit(&res,12);}//DBG_LOG(("\t\t\tset bit12\r\n"));}
 	if(temp_a >= 16000)	{temp_a -=16000;__set_bit(&res,0);}
 	if(temp_a >= 8000)	{temp_a -=8000;	__set_bit(&res,11);}
 	if(temp_a >= 4000)	{temp_a -=4000;	__set_bit(&res,9);}

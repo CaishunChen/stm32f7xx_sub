@@ -53,6 +53,7 @@
 #include "spi_handle.h"
 #include "flash_handle.h"
 #include "uart.h"
+#include "tab.h"
 
 /* USER CODE END Includes */
 
@@ -162,38 +163,35 @@ int main(void)
   while (1)
   {
   /* USER CODE END WHILE */
-  g_gpio_ctrl_table_raw[0].a += 500;
-	g_gpio_ctrl_table_raw[5].a += 500;
-	g_gpio_ctrl_table_raw[6].a += 500;
-	g_gpio_ctrl_table_raw[7].a += 500;
 		
-	g_gpio_ctrl_table_raw[0].p += 5625;
-	g_gpio_ctrl_table_raw[5].p += 5625;
-	g_gpio_ctrl_table_raw[6].p += 5625;
-	g_gpio_ctrl_table_raw[7].p += 5625;
-
-	if(g_gpio_ctrl_table_raw[0].a >= 63000)
+	/* USER CODE BEGIN 3 */
+	for(i=0;i<8;i++)
 	{
-		g_gpio_ctrl_table_raw[0].a = 0;
-		g_gpio_ctrl_table_raw[5].a = 0;
-		g_gpio_ctrl_table_raw[6].a = 0;
-		g_gpio_ctrl_table_raw[7].a = 0;
-		
+		g_gpio_ctrl_table_raw[i].a += 500;//inc
+		//g_gpio_ctrl_table_raw[0].p += 5625;
 	}
+		
+	if(g_gpio_ctrl_table_raw[0].a >= 63000)//clr
+	{
+		for(i=0;i<8;i++)
+		{
+			g_gpio_ctrl_table_raw[i].a = 0;
+		}
+	}
+	
 	if(g_gpio_ctrl_table_raw[0].p >= 360000)
 	{
-		g_gpio_ctrl_table_raw[0].p = 0;
-		g_gpio_ctrl_table_raw[5].p = 0;
-		g_gpio_ctrl_table_raw[6].p = 0;
-		g_gpio_ctrl_table_raw[7].p = 0;
+		for(i=0;i<8;i++)
+		{
+			g_gpio_ctrl_table_raw[i].p = 0;
+		}
 	}
 	
 	DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
 	gpio_convert_all();
 	sync_ctrl_all();
 
-		HAL_Delay(200);
-  /* USER CODE BEGIN 3 */
+	HAL_Delay(200);
 
   }
   /* USER CODE END 3 */

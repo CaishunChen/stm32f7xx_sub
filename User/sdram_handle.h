@@ -6,6 +6,7 @@
 #include "flash_handle.h"
 #include "bsp_mt25q.h"
 
+
 typedef struct
 {
 	uint32_t stand_val;
