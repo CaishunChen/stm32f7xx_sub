@@ -114,7 +114,7 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5976A61B)
 I (../Inc/gpio.h)(0x598E8842)
-F (../Src/gpio.c)(0x599BEAB6)(-c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../User --C99-I E:\童光强\2017-08\NV\stm32f765_sub_board_beta\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F765xx -DUSE_HAL_DRIVER -DSTM32F765xx -DDEBUG-o stm32f765_sub_board_beta\gpio.o --omf_browse stm32f765_sub_board_beta\gpio.crf --depend stm32f765_sub_board_beta\gpio.d)
+F (../Src/gpio.c)(0x599D5112)(-c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../User --C99-I E:\童光强\2017-08\NV\stm32f765_sub_board_beta\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F765xx -DUSE_HAL_DRIVER -DSTM32F765xx -DDEBUG-o stm32f765_sub_board_beta\gpio.o --omf_browse stm32f765_sub_board_beta\gpio.crf --depend stm32f765_sub_board_beta\gpio.d)
 I (../Inc/gpio.h)(0x598E8842)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x5976A61A)
 I (../Inc/stm32f7xx_hal_conf.h)(0x598E8847)
@@ -353,8 +353,8 @@ I (../User/bsp_mt25q.h)(0x5994F46D)
 I (../User/sdram_handle.h)(0x599BCA0A)
 I (../User/flash_handle.h)(0x59954E02)
 I (../User/gpio_handle.h)(0x5991419B)
-I (../User/cmd_handle.h)(0x5992B258)
-I (../User/spi_handle.h)(0x5990F7B6)
+I (../User/cmd_handle.h)(0x599D375B)
+I (../User/spi_handle.h)(0x599D5173)
 I (../User/uart.h)(0x598E5E96)
 I (../User/tab.h)(0x599BCFEE)
 F (../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c)(0x5976A61B)(-c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../User --C99-I E:\童光强\2017-08\NV\stm32f765_sub_board_beta\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F765xx -DUSE_HAL_DRIVER -DSTM32F765xx -DDEBUG-o stm32f765_sub_board_beta\stm32f7xx_hal_cortex.o --omf_browse stm32f765_sub_board_beta\stm32f7xx_hal_cortex.crf --depend stm32f765_sub_board_beta\stm32f7xx_hal_cortex.d)
@@ -1171,8 +1171,8 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5976A61B)
-F (..\User\spi_handle.c)(0x599102E5)(-c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../User --C99-I E:\童光强\2017-08\NV\stm32f765_sub_board_beta\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F765xx -DUSE_HAL_DRIVER -DSTM32F765xx -DDEBUG-o stm32f765_sub_board_beta\spi_handle.o --omf_browse stm32f765_sub_board_beta\spi_handle.crf --depend stm32f765_sub_board_beta\spi_handle.d)
-I (..\User\spi_handle.h)(0x5990F7B6)
+F (..\User\spi_handle.c)(0x599D518D)(-c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../User --C99-I E:\童光强\2017-08\NV\stm32f765_sub_board_beta\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F765xx -DUSE_HAL_DRIVER -DSTM32F765xx -DDEBUG-o stm32f765_sub_board_beta\spi_handle.o --omf_browse stm32f765_sub_board_beta\spi_handle.crf --depend stm32f765_sub_board_beta\spi_handle.d)
+I (..\User\spi_handle.h)(0x599D5173)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
 I (../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h)(0x5976A617)
 I (../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f765xx.h)(0x5976A617)
@@ -1210,8 +1210,8 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5976A61B)
 I (../Inc/spi.h)(0x598E8847)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x5976A61A)
-F (..\User\cmd_handle.c)(0x5992B258)(-c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../User --C99-I E:\童光强\2017-08\NV\stm32f765_sub_board_beta\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F765xx -DUSE_HAL_DRIVER -DSTM32F765xx -DDEBUG-o stm32f765_sub_board_beta\cmd_handle.o --omf_browse stm32f765_sub_board_beta\cmd_handle.crf --depend stm32f765_sub_board_beta\cmd_handle.d)
-I (..\User\cmd_handle.h)(0x5992B258)
+F (..\User\cmd_handle.c)(0x599D559F)(-c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../User --C99-I E:\童光强\2017-08\NV\stm32f765_sub_board_beta\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F765xx -DUSE_HAL_DRIVER -DSTM32F765xx -DDEBUG-o stm32f765_sub_board_beta\cmd_handle.o --omf_browse stm32f765_sub_board_beta\cmd_handle.crf --depend stm32f765_sub_board_beta\cmd_handle.d)
+I (..\User\cmd_handle.h)(0x599D375B)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
 I (../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h)(0x5976A617)
 I (../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f765xx.h)(0x5976A617)
@@ -1247,6 +1247,9 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5976A61B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5976A61B)
+I (..\User\spi_handle.h)(0x599D5173)
+I (../Inc/spi.h)(0x598E8847)
+I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x5976A61A)
 F (..\User\gpio_handle.c)(0x599BD71B)(-c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 -Otime --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../User --C99-I E:\童光强\2017-08\NV\stm32f765_sub_board_beta\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="517" -D_RTE_ -DSTM32F765xx -DUSE_HAL_DRIVER -DSTM32F765xx -DDEBUG-o stm32f765_sub_board_beta\gpio_handle.o --omf_browse stm32f765_sub_board_beta\gpio_handle.crf --depend stm32f765_sub_board_beta\gpio_handle.d)
 I (..\User\gpio_handle.h)(0x5991419B)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB2B80)
