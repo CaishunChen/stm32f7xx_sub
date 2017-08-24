@@ -10,7 +10,7 @@
 #define CTRL_MASK (0x1FFF) //控制输出掩码
 
 //此表储存8组IO口的默认值
-const uint16_t gpio_ctrl_table_reset[8]={0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+const uint16_t gpio_ctrl_table_reset[8]={0x01F8,0x01F8,0x01F8,0x01F8,0x01F8,0x01F8,0x01F8,0x01F8};
 //const uint32_t gpio_ctrl_table_base[8]={GPIOA,GPIOA,GPIOA,GPIOA,GPIOA,GPIOI,GPIOJ,GPIOC};
 uint16_t g_gpio_ctrl_table[8]={0};
 type_gpio_ctrl g_gpio_ctrl_table_raw[8]={0};

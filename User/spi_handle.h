@@ -16,7 +16,7 @@ typedef struct
 	uint8_t msg_type;
 	uint8_t *msg_ptr;
 	uint8_t check_val;
-	uint8_t valid;
+	//uint8_t valid;
 }NGVAM_MSG;
 
 extern NGVAM_MSG g_msg;

@@ -88,7 +88,9 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	uint32_t i;
+	uint32_t i,j;
+	uint32_t a_temp[]={500,1000,2000,4000,8000,16000,31500,51000,63000};
+	uint32_t p_temp[]={5625,11250,22500,45000,90000,180000,35500};
   /* USER CODE END 1 */
 
   /* Enable I-Cache-------------------------------------------------------------*/
@@ -127,10 +129,12 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
 	
-	#if 0
+	#if 1
   SDRAM_Initialization_Sequence(&hsdram1);
   fsmc_sdram_test();
-
+	#endif
+	
+	#if 0
 	if(QSPI_UserInit() == 0)
 	{
 		DBG_LOG(("flash init ok\r\n"));
@@ -151,11 +155,12 @@ int main(void)
 //	printf("\r\n");
 //	for(i=0;i<64;i++)printf("r1[%d]=%d\r\n",i,r1[i]);
 	#endif
+//	
+//	g_gpio_ctrl_table_raw[0].a = 0;
+//	g_gpio_ctrl_table_raw[5].a = 0;
 	
-	g_gpio_ctrl_table_raw[0].a = 0;
-	g_gpio_ctrl_table_raw[5].a = 0;
-	
-	
+	reset_ctrl_all();
+	HAL_Delay(8000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -165,34 +170,36 @@ int main(void)
   /* USER CODE END WHILE */
 		
 	/* USER CODE BEGIN 3 */
-	for(i=0;i<8;i++)
-	{
-		g_gpio_ctrl_table_raw[i].a += 500;//inc
-		//g_gpio_ctrl_table_raw[0].p += 5625;
-	}
+	for(j=0;j<8;j++)
+		{
+		for(i=0;i<8;i++)
+		{
+			g_gpio_ctrl_table_raw[i].a = a_temp[j];//inc
+			//g_gpio_ctrl_table_raw[0].p += 5625;
+		}
+			
+//		if(g_gpio_ctrl_table_raw[0].a >= 63000)//clr
+//		{
+//			for(i=0;i<8;i++)
+//			{
+//				g_gpio_ctrl_table_raw[i].a = 0;
+//			}
+//		}
+//		
+//		if(g_gpio_ctrl_table_raw[0].p >= 360000)
+//		{
+//			for(i=0;i<8;i++)
+//			{
+//				g_gpio_ctrl_table_raw[i].p = 0;
+//			}
+//		}
 		
-	if(g_gpio_ctrl_table_raw[0].a >= 63000)//clr
-	{
-		for(i=0;i<8;i++)
-		{
-			g_gpio_ctrl_table_raw[i].a = 0;
+		DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
+		gpio_convert_all();
+		sync_ctrl_all();
+		//HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_12|GPIO_PIN_11);
+		HAL_Delay(10000);
 		}
-	}
-	
-	if(g_gpio_ctrl_table_raw[0].p >= 360000)
-	{
-		for(i=0;i<8;i++)
-		{
-			g_gpio_ctrl_table_raw[i].p = 0;
-		}
-	}
-	
-	DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
-	gpio_convert_all();
-	sync_ctrl_all();
-	//HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_12|GPIO_PIN_11);
-	HAL_Delay(2000);
-
   }
   /* USER CODE END 3 */
 

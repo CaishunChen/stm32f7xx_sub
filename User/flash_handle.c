@@ -52,9 +52,9 @@ void print_all_address(void)
 {
 	uint8_t i,j;
 	DBG_LOG(("all address are:\r\n"));
-	for(i=0;i<MAX_CHANNEL;i++)
+	for(i=0;i<MAX_FREQ;i++)
 	{
-		for(j=0;j<MAX_FREQ;j++)
+		for(j=0;j<MAX_CHANNEL;j++)
 		{
 			DBG_LOG(("%.7X ",get_flash_address(i,j)));
 		}
@@ -83,6 +83,7 @@ QSPI_StaticTypeDef flash_read(uint8_t freq,uint8_t channel,uint8_t *p_a_data,uin
 {
 	uint32_t addr=0;
 	QSPI_StaticTypeDef sta=(QSPI_StaticTypeDef)0xFF;
+	DBG_LOG(("flash read \r\n"));
 	addr=get_flash_address(freq,channel);
 	sta=QSPI_ReadBuff(p_a_data,addr|AMPLITUDE_STORE_OFFSET,AMPLITUDE_STORE_SIZE);
 	if(sta != QSPI_OK)
@@ -128,7 +129,8 @@ QSPI_StaticTypeDef flash_write(uint8_t freq,uint8_t channel,uint8_t *p_a_data,ui
 
 
 QSPI_StaticTypeDef flash_clean(uint8_t freq,uint8_t channel)
-{
+{
+
 	uint32_t addr=0;
 	QSPI_StaticTypeDef sta=(QSPI_StaticTypeDef)0xFF;
 	addr=get_flash_address(freq,channel);

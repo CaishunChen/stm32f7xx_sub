@@ -1,5 +1,7 @@
 #include "cmd_handle.h"
 #include "spi.h"
+#include "stdlib.h"
+#include "gpio_handle.h"
 
 
 #ifdef DEBUG
@@ -56,9 +58,14 @@ void analyze_msg_type(void)
 
 static void __handle_play(void)
 {
+	uint16_t i=0;
 	DBG_LOG(("__handle_play\r\n"));
+	memcpy(g_gpio_ctrl_table_raw,gp_msg->msg_ptr,64);
+	gpio_convert_all();
+	sync_ctrl_all();
 	__HAL_SPI_ENABLE_IT(&hspi2, (SPI_IT_RXNE | SPI_IT_ERR));
 	__HAL_SPI_ENABLE(&hspi2);
+	__to_spi_rx_cmd(&hspi2);
 
 }
 
@@ -77,6 +84,11 @@ static void __handle_ctrl(void)
  {
 	 DBG_LOG(("__handle_read\r\n"));
 
+ }
+
+ uint8_t check_msg(uint8_t *ptr,uint16_t len)
+ {
+	;
  }
 
 

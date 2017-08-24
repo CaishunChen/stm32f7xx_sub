@@ -31,6 +31,8 @@ static void __handle_spi_reply(SPI_HandleTypeDef *hspi);
 static void __handle_spi_rx_cmd(SPI_HandleTypeDef *hspi);
 static void __spi_busy(void);
 static void __spi_idle(void);
+static void read_delay(void);
+
 
 void spi_rx_isr(SPI_HandleTypeDef *hspi)
 {
@@ -75,9 +77,6 @@ static void __handle_spi_rx_data(SPI_HandleTypeDef *hspi)
 	{
 		__spi_busy();
 		__to_spi_idle(hspi);
-		//disable int 
-	__HAL_SPI_DISABLE_IT(hspi, (SPI_IT_RXNE | SPI_IT_ERR));
-	__HAL_SPI_DISABLE(hspi);
 		// to cmd.c 
 	}
 }
@@ -101,13 +100,17 @@ static void __handle_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 			gp_msg->msg_type = *(gp_rx_u8 + 4);//type
 			gp_msg->msg_ptr = (gp_rx_u8 + 5);
 			DBG_LOG(("__handle_spi2_rx_cmd_completed,to rec data\r\n"));
-			gp_msg->valid = msg_valid;
 			__to_spi_rx_data(hspi);
 		}
 		else
 		{
 			// frame error
+			/*gp_msg->msg_len = 0;
+			gp_msg->msg_type =NULL;
+			gp_msg->msg_ptr = NULL;
 			gp_msg->valid = msg_invalid;
+			*/
+			__to_spi_rx_cmd(hspi);
 		}
 	}
 }
@@ -118,6 +121,8 @@ static void __handle_spi_reply(SPI_HandleTypeDef *hspi)
 	DBG_LOG(("__handle_spi2_reply\r\n"));
 }
 
+
+//准备接收数据
 void __to_spi_rx_data(SPI_HandleTypeDef *hspi)
 {
 	hspi->RxXferCount=0;
@@ -126,6 +131,7 @@ void __to_spi_rx_data(SPI_HandleTypeDef *hspi)
 	g_spi_state=spi_rx_data;
 }
 
+//准备接收命令
 void __to_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 {
 	hspi->RxXferCount=0;
@@ -135,8 +141,11 @@ void __to_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 
 }
 
+//准备进入空闲
 void __to_spi_idle(SPI_HandleTypeDef *hspi)
 {
+	__HAL_SPI_DISABLE_IT(hspi, (SPI_IT_RXNE | SPI_IT_ERR));
+	__HAL_SPI_DISABLE(hspi);
 	g_spi_state = spi_idle;
 }
 
@@ -144,22 +153,28 @@ void spi_int_config(SPI_HandleTypeDef *hspi,void (*RxISR)(struct __SPI_HandleTyp
 {
 	__to_spi_rx_cmd(hspi);
 	hspi->RxISR=RxISR;
-	gp_msg->valid = msg_invalid;
 }
 
 static void __spi_busy(void)
 {
-	;
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_14;
 }
 
 static void __spi_idle(void)
 {
-	;
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_14 << 16;
 }
 
-uint8_t cal_check_val(void)
+void ready_to_read(void)
 {
-	return 0;
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_14;
+	read_delay();
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_14 << 16;
 }
 
+static void read_delay(void)
+{
+	__IO uint16_t i=0x10;
+	while(i--);
+}
 
