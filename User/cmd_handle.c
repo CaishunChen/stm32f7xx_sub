@@ -1,6 +1,6 @@
 #include "cmd_handle.h"
 #include "spi.h"
-#include "stdlib.h"
+#include "string.h"
 #include "gpio_handle.h"
 
 
@@ -88,7 +88,7 @@ static void __handle_ctrl(void)
 
  uint8_t check_msg(uint8_t *ptr,uint16_t len)
  {
-	;
+	return 0;
  }
 
 

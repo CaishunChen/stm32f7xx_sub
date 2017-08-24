@@ -117,12 +117,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  //MX_SPI2_Init();
+  MX_SPI2_Init();
   MX_FMC_Init();
   MX_UART4_Init();
   MX_TIM14_Init();
   MX_QUADSPI_Init();
-  MX_SPI1_Init();
+  //MX_SPI1_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
@@ -158,6 +158,8 @@ int main(void)
 //	
 //	g_gpio_ctrl_table_raw[0].a = 0;
 //	g_gpio_ctrl_table_raw[5].a = 0;
+	
+	spi_int_config(&hspi2,spi_rx_isr);
 	
 	reset_ctrl_all();
 	HAL_Delay(8000);
