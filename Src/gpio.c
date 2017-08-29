@@ -80,7 +80,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOI, GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11 
                           |GPIO_PIN_12|GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_4 
-                          |GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8, GPIO_PIN_RESET);
+                          |GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_12, GPIO_PIN_RESET);
 
 	//-----------------------------------------add disable spi2 remap------------------------------
 //	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
@@ -107,8 +107,8 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
 //  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_14, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_15, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_14, GPIO_PIN_SET);//int 1
+	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_15, GPIO_PIN_RESET);//int2
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8 
@@ -130,7 +130,7 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : PI9 PI10 PI11 PI12 
                            PI0 PI1 PI4 PI5 
-                           PI6 PI7 PI8*/
+                           PI6 PI7 */
   GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12 
                           |GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_5 
                           |GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8;

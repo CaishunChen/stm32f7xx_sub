@@ -122,7 +122,7 @@ int main(void)
   MX_UART4_Init();
   MX_TIM14_Init();
   MX_QUADSPI_Init();
-  //MX_SPI1_Init();
+  MX_SPI1_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
@@ -134,7 +134,7 @@ int main(void)
   fsmc_sdram_test();
 	#endif
 	
-	#if 0
+	#if 1
 	if(QSPI_UserInit() == 0)
 	{
 		DBG_LOG(("flash init ok\r\n"));
@@ -144,25 +144,12 @@ int main(void)
   DBG_LOG(("sys init ok\r\n"));
 	
 	print_all_address();
-
-	#if 0
-//	for(i=0;i<128;i++){t[i]=i;printf("t[%d]=%d\r\n",i,t[i]);};
-//	for(i=0;i<64;i++){t1[i]=i;printf("t1[%d]=%d\r\n",i,t1[i]);};
-//	printf("init t t1\r\n");
-//	flash_write(1,1,t,t1)
-//	flash_read(1,1,r,r1);
-//	for(i=0;i<128;i++)printf("r[%d]=%d\r\n",i,r[i]);
-//	printf("\r\n");
-//	for(i=0;i<64;i++)printf("r1[%d]=%d\r\n",i,r1[i]);
-	#endif
-//	
-//	g_gpio_ctrl_table_raw[0].a = 0;
-//	g_gpio_ctrl_table_raw[5].a = 0;
 	
 	spi_int_config(&hspi2,spi_rx_isr);
+
 	
 	reset_ctrl_all();
-	HAL_Delay(8000);
+	HAL_Delay(800);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -172,43 +159,15 @@ int main(void)
   /* USER CODE END WHILE */
 		
 	/* USER CODE BEGIN 3 */
-	for(j=0;j<8;j++)
-		{
-		for(i=0;i<8;i++)
-		{
-			g_gpio_ctrl_table_raw[i].a = a_temp[j];//inc
-			//g_gpio_ctrl_table_raw[0].p += 5625;
-		}
-			
-//		if(g_gpio_ctrl_table_raw[0].a >= 63000)//clr
-//		{
-//			for(i=0;i<8;i++)
-//			{
-//				g_gpio_ctrl_table_raw[i].a = 0;
-//			}
-//		}
-//		
-//		if(g_gpio_ctrl_table_raw[0].p >= 360000)
-//		{
-//			for(i=0;i<8;i++)
-//			{
-//				g_gpio_ctrl_table_raw[i].p = 0;
-//			}
-//		}
-		
-		DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
-		gpio_convert_all();
-		sync_ctrl_all();
-		//HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_12|GPIO_PIN_11);
-		HAL_Delay(10000);
-		}
+
+		//HAL_Delay(10000);
+
   }
   /* USER CODE END 3 */
 
 }
 
-/** System Clock Configuration
-*/
+/** System Clock Configuration*/
 void SystemClock_Config(void)
 {
 

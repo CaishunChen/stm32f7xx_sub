@@ -36,9 +36,8 @@ static void read_delay(void);
 
 void spi_rx_isr(SPI_HandleTypeDef *hspi)
 {
-	hspi=hspi;//
 	//to add rx data from spi2
-	DBG_LOG(("enter spi2 int\r\n"));
+	//DBG_LOG(("enter spi2 int\r\n"));
 	switch (g_spi_state)
 		{
 		case spi_idle:
@@ -61,22 +60,29 @@ void spi_rx_isr(SPI_HandleTypeDef *hspi)
 
 static void __handle_spi_idle(SPI_HandleTypeDef *hspi)
 {
+	uint8_t i=0;
 	DBG_LOG(("__handle_spi2_idle\r\n"));
-
+	for(i=0;i<66;i++)
+	{
+		DBG_LOG((" %x",g_spi_rx_buffer[i]));
+	}
+	while(1);
 }
 
 static void __handle_spi_rx_data(SPI_HandleTypeDef *hspi)
 {
-	DBG_LOG(("__handle_spi2_rx_data\r\n"));
+	//DBG_LOG(("__handle_spi2_rx_data\r\n"));
+	//DBG_LOG(("%d %d",hspi->RxXferCount,hspi->RxXferSize));
 	if(hspi->RxXferCount < hspi->RxXferSize)
 	{
-		*(hspi->pRxBuffPtr++)=*((__IO uint8_t *)(SPI2->DR));//get data
+		*(hspi->pRxBuffPtr++)=*((__IO uint8_t *)&SPI2->DR);//get data
 		hspi->RxXferCount++;
 	}
 	if(hspi->RxXferCount == (gp_msg->msg_len)+2)
 	{
 		__spi_busy();
 		__to_spi_idle(hspi);
+		__handle_spi_idle(hspi);
 		// to cmd.c 
 	}
 }
@@ -84,35 +90,39 @@ static void __handle_spi_rx_data(SPI_HandleTypeDef *hspi)
 static void __handle_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 {
 	DBG_LOG(("__handle_spi2_rx_cmd\r\n"));
+	//DBG_LOG(("%d %d\r\n",hspi->RxXferCount,hspi->RxXferSize));
 	if(hspi->RxXferCount < hspi->RxXferSize)
 	{
-		*(hspi->pRxBuffPtr++)=*((__IO uint8_t *)(SPI2->DR));//get data
+		*(hspi->pRxBuffPtr++)=*((__IO uint8_t *)&SPI2->DR);
 		hspi->RxXferCount++;
+		//DBG_LOG(("+"));
 	}
+	else
+	{
+		//DBG_LOG(("%x %x %x %x %x",g_spi_rx_cmd[0],g_spi_rx_cmd[1],g_spi_rx_cmd[2],g_spi_rx_cmd[3],g_spi_rx_cmd[4]));
+	}
+	#if 1
 	
 	if(hspi->RxXferCount == 5)//
 	{
 		//check
+		DBG_LOG(("check head\r\n"));
 		if(*gp_rx_u16 == 0x5A5A)
 		{
 			gp_msg->msg_len = *(gp_rx_u16 + 1);//len
 			if(gp_msg->msg_len >255) gp_msg->msg_len = 255;//limit len 
 			gp_msg->msg_type = *(gp_rx_u8 + 4);//type
 			gp_msg->msg_ptr = (gp_rx_u8 + 5);
-			DBG_LOG(("__handle_spi2_rx_cmd_completed,to rec data\r\n"));
+			//DBG_LOG(("%d-%d\r\n",gp_msg->msg_len,gp_msg->msg_type));
+			//DBG_LOG(("__handle_spi2_rx_cmd_completed,to rec data\r\n"));
 			__to_spi_rx_data(hspi);
 		}
 		else
 		{
-			// frame error
-			/*gp_msg->msg_len = 0;
-			gp_msg->msg_type =NULL;
-			gp_msg->msg_ptr = NULL;
-			gp_msg->valid = msg_invalid;
-			*/
 			__to_spi_rx_cmd(hspi);
 		}
 	}
+	#endif
 }
 
 
@@ -144,6 +154,7 @@ void __to_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 //准备进入空闲
 void __to_spi_idle(SPI_HandleTypeDef *hspi)
 {
+	DBG_LOG(("__handle_spi2_idle\r\n"));
 	__HAL_SPI_DISABLE_IT(hspi, (SPI_IT_RXNE | SPI_IT_ERR));
 	__HAL_SPI_DISABLE(hspi);
 	g_spi_state = spi_idle;
@@ -151,8 +162,11 @@ void __to_spi_idle(SPI_HandleTypeDef *hspi)
 
 void spi_int_config(SPI_HandleTypeDef *hspi,void (*RxISR)(struct __SPI_HandleTypeDef *hspi))
 {
-	__to_spi_rx_cmd(hspi);
+	DBG_LOG(("config spi2 int\r\n"));
 	hspi->RxISR=RxISR;
+	__to_spi_rx_cmd(hspi);
+	__HAL_SPI_ENABLE_IT(hspi, (SPI_IT_RXNE | SPI_IT_ERR));
+	__HAL_SPI_ENABLE(hspi);
 }
 
 static void __spi_busy(void)
