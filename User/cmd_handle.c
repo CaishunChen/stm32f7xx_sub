@@ -67,7 +67,6 @@ static void __handle_play(void)
 	}
 	gpio_convert_all();
 	sync_ctrl_all();
-	while(1);
 	__HAL_SPI_ENABLE_IT(&hspi2, (SPI_IT_RXNE | SPI_IT_ERR));
 	__HAL_SPI_ENABLE(&hspi2);
 	//__to_spi_rx_cmd(&hspi2);
