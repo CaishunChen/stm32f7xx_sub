@@ -17,9 +17,7 @@ static void __handle_ctrl(void);
 static void __handle_read(void);
 
 
-
-
-void analyze_msg_type(void)
+void analyze_msg(void)
 {
 	switch (gp_msg->msg_type)
 	{
@@ -59,13 +57,20 @@ void analyze_msg_type(void)
 static void __handle_play(void)
 {
 	uint16_t i=0;
+	uint32_t *p=(uint32_t *)g_gpio_ctrl_table_raw;//-
+	
 	DBG_LOG(("__handle_play\r\n"));
-	memcpy(g_gpio_ctrl_table_raw,gp_msg->msg_ptr,64);
+	memcpy(g_gpio_ctrl_table_raw,gp_msg->msg_ptr+5,64);
+	for(i=0;i<16;i++)
+	{
+		DBG_LOG(("%.2d:%.8X\r\n",i,*p++));
+	}
 	gpio_convert_all();
 	sync_ctrl_all();
+	while(1);
 	__HAL_SPI_ENABLE_IT(&hspi2, (SPI_IT_RXNE | SPI_IT_ERR));
 	__HAL_SPI_ENABLE(&hspi2);
-	__to_spi_rx_cmd(&hspi2);
+	//__to_spi_rx_cmd(&hspi2);
 
 }
 

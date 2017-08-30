@@ -161,7 +161,7 @@ void gpio_convert_all(void)
 	for(i=0;i<8;i++)
 	{
 		gpio_convert_one(&g_gpio_ctrl_table_raw[i],&g_gpio_ctrl_table[i]);
-		DBG_LOG(("now g_gpio_ctrl_table[%d] is %.4X \r\n",i,g_gpio_ctrl_table[i]));
+		//DBG_LOG(("now g_gpio_ctrl_table[%d] is %.4X \r\n",i,g_gpio_ctrl_table[i]));
 	}
 }
 

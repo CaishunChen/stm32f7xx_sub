@@ -31,5 +31,7 @@ typedef enum
 }NGVAM_MESSAGE_TYPE;
 
 
+void analyze_msg(void);
+
 #endif//_cmd_handle_H_
 

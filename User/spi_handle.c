@@ -1,5 +1,6 @@
 #include "spi_handle.h"
 #include "spi.h"
+#include "cmd_handle.h"
 
 #ifdef DEBUG
 #define DBG_LOG(x) printf x
@@ -62,11 +63,14 @@ static void __handle_spi_idle(SPI_HandleTypeDef *hspi)
 {
 	uint8_t i=0;
 	DBG_LOG(("__handle_spi2_idle\r\n"));
-	for(i=0;i<66;i++)
+	for(i=0;i<hspi->RxXferSize;i++)
 	{
-		DBG_LOG((" %x",g_spi_rx_buffer[i]));
+		DBG_LOG((" %.2X",g_spi_rx_buffer[i]));
 	}
-	while(1);
+	analyze_msg();
+	__spi_idle();
+	__to_spi_rx_cmd(hspi);
+	//while(1);
 }
 
 static void __handle_spi_rx_data(SPI_HandleTypeDef *hspi)
@@ -78,7 +82,7 @@ static void __handle_spi_rx_data(SPI_HandleTypeDef *hspi)
 		*(hspi->pRxBuffPtr++)=*((__IO uint8_t *)&SPI2->DR);//get data
 		hspi->RxXferCount++;
 	}
-	if(hspi->RxXferCount == (gp_msg->msg_len)+2)
+	if(hspi->RxXferCount == hspi->RxXferSize)
 	{
 		__spi_busy();
 		__to_spi_idle(hspi);
@@ -89,7 +93,7 @@ static void __handle_spi_rx_data(SPI_HandleTypeDef *hspi)
 
 static void __handle_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 {
-	DBG_LOG(("__handle_spi2_rx_cmd\r\n"));
+	//DBG_LOG(("__handle_spi2_rx_cmd\r\n"));
 	//DBG_LOG(("%d %d\r\n",hspi->RxXferCount,hspi->RxXferSize));
 	if(hspi->RxXferCount < hspi->RxXferSize)
 	{
@@ -112,9 +116,9 @@ static void __handle_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 			gp_msg->msg_len = *(gp_rx_u16 + 1);//len
 			if(gp_msg->msg_len >255) gp_msg->msg_len = 255;//limit len 
 			gp_msg->msg_type = *(gp_rx_u8 + 4);//type
-			gp_msg->msg_ptr = (gp_rx_u8 + 5);
-			//DBG_LOG(("%d-%d\r\n",gp_msg->msg_len,gp_msg->msg_type));
-			//DBG_LOG(("__handle_spi2_rx_cmd_completed,to rec data\r\n"));
+			gp_msg->msg_ptr = g_spi_rx_buffer;
+			DBG_LOG(("%d-%X\r\n",gp_msg->msg_len,gp_msg->msg_type));
+			DBG_LOG(("__handle_spi2_rx_cmd_completed,to rec data\r\n"));
 			__to_spi_rx_data(hspi);
 		}
 		else
@@ -136,7 +140,7 @@ static void __handle_spi_reply(SPI_HandleTypeDef *hspi)
 void __to_spi_rx_data(SPI_HandleTypeDef *hspi)
 {
 	hspi->RxXferCount=0;
-	hspi->RxXferSize=(gp_msg->msg_len)+2;
+	hspi->RxXferSize=(gp_msg->msg_len)+7;
 	hspi->pRxBuffPtr=g_spi_rx_buffer;
 	g_spi_state=spi_rx_data;
 }
@@ -154,7 +158,7 @@ void __to_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 //准备进入空闲
 void __to_spi_idle(SPI_HandleTypeDef *hspi)
 {
-	DBG_LOG(("__handle_spi2_idle\r\n"));
+	DBG_LOG(("__to_spi2_idle\r\n"));
 	__HAL_SPI_DISABLE_IT(hspi, (SPI_IT_RXNE | SPI_IT_ERR));
 	__HAL_SPI_DISABLE(hspi);
 	g_spi_state = spi_idle;

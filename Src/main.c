@@ -143,7 +143,7 @@ int main(void)
 	
   DBG_LOG(("sys init ok\r\n"));
 	
-	print_all_address();
+	//print_all_address();
 	
 	spi_int_config(&hspi2,spi_rx_isr);
 
