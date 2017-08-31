@@ -17,10 +17,10 @@ typedef struct
 	uint8_t *msg_ptr;
 	uint8_t check_val;
 	//uint8_t valid;
-}NGVAM_MSG;
+}NGVAM_MSG_HEAD;
 
-extern NGVAM_MSG g_msg;
-extern NGVAM_MSG *gp_msg;
+extern NGVAM_MSG_HEAD g_msg;
+extern NGVAM_MSG_HEAD *gp_msg;
 
 
 void spi_rx_isr(SPI_HandleTypeDef *hspi);

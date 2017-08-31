@@ -23,8 +23,8 @@ uint8_t  *gp_rx_u8=g_spi_rx_cmd;
 uint16_t *gp_rx_u16=(uint16_t *)g_spi_rx_cmd;
 uint8_t g_msg_to_process;
 
-NGVAM_MSG g_msg;
-NGVAM_MSG *gp_msg=&g_msg;
+NGVAM_MSG_HEAD g_msg;
+NGVAM_MSG_HEAD *gp_msg=&g_msg;
 
 static void __handle_spi_idle(SPI_HandleTypeDef *hspi);
 static void __handle_spi_rx_data(SPI_HandleTypeDef *hspi);
