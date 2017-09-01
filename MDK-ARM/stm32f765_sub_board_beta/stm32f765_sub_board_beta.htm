@@ -3,11 +3,11 @@
 <title>Static Call Graph - [stm32f765_sub_board_beta\stm32f765_sub_board_beta.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image stm32f765_sub_board_beta\stm32f765_sub_board_beta.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Thu Aug 31 19:15:58 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Fri Sep 01 18:16:50 2017
 <BR><P>
-<H3>Maximum Stack Usage =        376 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        368 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-spi_rx_isr &rArr; analyze_msg &rArr; flash_write &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
+spi_rx_isr &rArr; analyze_msg &rArr; flash_write_phase &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 <P>
 <H3>
 Mutually Recursive functions
@@ -1052,15 +1052,15 @@ Global Symbols
 <P><STRONG><a name="[8]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f7xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f765xx.o(RESET)
 </UL>
-<P><STRONG><a name="[c7]"></a>QSPI_EraseSector_32K</STRONG> (Thumb, 92 bytes, Stack size 40 bytes, bsp_mt25q.o(i.QSPI_EraseSector_32K))
-<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = QSPI_EraseSector_32K &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[c7]"></a>QSPI_EraseSector_4K</STRONG> (Thumb, 92 bytes, Stack size 40 bytes, bsp_mt25q.o(i.QSPI_EraseSector_4K))
+<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = QSPI_EraseSector_4K &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WriteEnable
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_SendCmdData
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_AutoPollingMemReady
 </UL>
-<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_clean
+<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
 </UL>
 
 <P><STRONG><a name="[c9]"></a>QSPI_Quad_Enter</STRONG> (Thumb, 200 bytes, Stack size 56 bytes, bsp_mt25q.o(i.QSPI_Quad_Enter))
@@ -1116,7 +1116,8 @@ Global Symbols
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_SendCmdData
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_AutoPollingMemReady
 </UL>
-<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write
+<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
 </UL>
 
 <P><STRONG><a name="[cf]"></a>SDRAM_Initialization_Sequence</STRONG> (Thumb, 168 bytes, Stack size 24 bytes, sdram_handle.o(i.SDRAM_Initialization_Sequence))
@@ -1268,8 +1269,8 @@ Global Symbols
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_port6
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_ctrl_port6
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_all
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_clean
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analyze_msg
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__to_spi_idle
 </UL>
@@ -1288,35 +1289,36 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[db]"></a>analyze_msg</STRONG> (Thumb, 378 bytes, Stack size 24 bytes, cmd_handle.o(i.analyze_msg))
-<BR><BR>[Stack]<UL><LI>Max Depth = 336<LI>Call Chain = analyze_msg &rArr; flash_write &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[db]"></a>analyze_msg</STRONG> (Thumb, 314 bytes, Stack size 24 bytes, cmd_handle.o(i.analyze_msg))
+<BR><BR>[Stack]<UL><LI>Max Depth = 328<LI>Call Chain = analyze_msg &rArr; flash_write_phase &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_all
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_convert_all
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_clean
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_memcpy4_5
 </UL>
 <BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_rx_isr
 </UL>
 
-<P><STRONG><a name="[de]"></a>flash_clean</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, flash_handle.o(i.flash_clean))
-<BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = flash_clean &rArr; QSPI_EraseSector_32K &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[df]"></a>flash_write_amplitude</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, flash_handle.o(i.flash_write_amplitude))
+<BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = flash_write_amplitude &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_32K
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WriteBuff
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_4K
 </UL>
 <BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analyze_msg
 </UL>
 
-<P><STRONG><a name="[df]"></a>flash_write</STRONG> (Thumb, 134 bytes, Stack size 24 bytes, flash_handle.o(i.flash_write))
-<BR><BR>[Stack]<UL><LI>Max Depth = 312<LI>Call Chain = flash_write &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[de]"></a>flash_write_phase</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, flash_handle.o(i.flash_write_phase))
+<BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = flash_write_phase &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WriteBuff
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_32K
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_4K
 </UL>
 <BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analyze_msg
 </UL>
@@ -1389,7 +1391,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[e6]"></a>spi_int_config</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, spi_handle.o(i.spi_int_config))
+<P><STRONG><a name="[e6]"></a>spi_int_config</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, spi_handle.o(i.spi_int_config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = spi_int_config &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1398,7 +1400,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[79]"></a>spi_rx_isr</STRONG> (Thumb, 378 bytes, Stack size 40 bytes, spi_handle.o(i.spi_rx_isr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 376<LI>Call Chain = spi_rx_isr &rArr; analyze_msg &rArr; flash_write &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
+<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = spi_rx_isr &rArr; analyze_msg &rArr; flash_write_phase &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analyze_msg
@@ -1468,7 +1470,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_UserInit
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_Quad_Enter
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WriteBuff
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_32K
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_4K
 </UL>
 
 <P><STRONG><a name="[c6]"></a>QSPI_SendCmdData</STRONG> (Thumb, 114 bytes, Stack size 88 bytes, bsp_mt25q.o(i.QSPI_SendCmdData))
@@ -1483,7 +1485,7 @@ Local Symbols
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WriteEnable
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_AutoPollingMemReady
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WriteBuff
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_32K
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_4K
 </UL>
 
 <P><STRONG><a name="[c8]"></a>QSPI_WriteEnable</STRONG> (Thumb, 66 bytes, Stack size 32 bytes, bsp_mt25q.o(i.QSPI_WriteEnable))
@@ -1494,7 +1496,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_UserInit
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_Quad_Enter
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_WriteBuff
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_32K
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_EraseSector_4K
 </UL>
 
 <P><STRONG><a name="[d9]"></a>_printf_core</STRONG> (Thumb, 658 bytes, Stack size 104 bytes, printf5.o(i._printf_core), UNUSED)

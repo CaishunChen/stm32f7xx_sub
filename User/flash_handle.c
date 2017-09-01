@@ -100,13 +100,13 @@ QSPI_StaticTypeDef flash_read(uint8_t freq,uint8_t channel,uint8_t *p_a_data,uin
 	return QSPI_OK;
 }
 
-QSPI_StaticTypeDef flash_write(uint8_t freq,uint8_t channel,uint8_t *p_a_data,uint8_t *p_p_data)
+QSPI_StaticTypeDef flash_write_amplitude(uint8_t freq,uint8_t channel,uint8_t *p_a_data)
 {
 	uint32_t addr=0;
 	QSPI_StaticTypeDef sta=(QSPI_StaticTypeDef)0xFF;
 	addr=get_flash_address(freq,channel);
 	DBG_LOG(("write addr is %.7X\r\n",addr));
-	sta=QSPI_EraseSector_32K(addr >> 15 );
+	sta=QSPI_EraseSector_4K(addr >> 12 );
 	if(sta != QSPI_OK)
 	{
 		DBG_LOG(("sector %d erase error\r\n",addr));
@@ -118,10 +118,26 @@ QSPI_StaticTypeDef flash_write(uint8_t freq,uint8_t channel,uint8_t *p_a_data,ui
 		DBG_LOG(("write amplitude %.7X error\r\n",addr));
 		return sta;
 	}
+	 return QSPI_OK;
+}
+
+
+QSPI_StaticTypeDef flash_write_phase(uint8_t freq,uint8_t channel,uint8_t *p_p_data)
+{
+	uint32_t addr=0;
+	QSPI_StaticTypeDef sta=(QSPI_StaticTypeDef)0xFF;
+	addr=get_flash_address(freq,channel);
+	DBG_LOG(("write addr is %.7X\r\n",addr));
+	sta=QSPI_EraseSector_4K(addr >> 12 );
+	if(sta != QSPI_OK)
+	{
+		DBG_LOG(("sector %d erase error\r\n",addr));
+		return sta;
+	}
 	sta=QSPI_WriteBuff(p_p_data,addr|PHASE_STORE_OFFSET,PHASE_STORE_SIZE);
 	if(sta != QSPI_OK)
 	{
-		DBG_LOG(("write phase %.7X error\r\n",addr));
+		DBG_LOG(("write amplitude %.7X error\r\n",addr));
 		return sta;
 	}
 	 return QSPI_OK;

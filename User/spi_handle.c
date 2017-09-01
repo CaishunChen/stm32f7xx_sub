@@ -23,7 +23,7 @@ uint8_t  *gp_rx_u8=g_spi_rx_cmd;
 uint16_t *gp_rx_u16=(uint16_t *)g_spi_rx_cmd;
 uint8_t g_msg_to_process;
 
-NGVAM_MSG_HEAD g_msg;
+NGVAM_MSG_HEAD g_msg;//传表消息头 
 NGVAM_MSG_HEAD *gp_msg=&g_msg;
 
 static void __handle_spi_idle(SPI_HandleTypeDef *hspi);
@@ -33,6 +33,7 @@ static void __handle_spi_rx_cmd(SPI_HandleTypeDef *hspi);
 static void __spi_busy(void);
 static void __spi_idle(void);
 static void read_delay(void);
+static void ready_to_read(void);
 
 
 void spi_rx_isr(SPI_HandleTypeDef *hspi)
@@ -133,6 +134,7 @@ static void __handle_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 static void __handle_spi_reply(SPI_HandleTypeDef *hspi)
 {
 	DBG_LOG(("__handle_spi2_reply\r\n"));
+	ready_to_read();
 }
 
 
@@ -152,7 +154,6 @@ void __to_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 	hspi->RxXferSize=5;
 	hspi->pRxBuffPtr=g_spi_rx_cmd;
 	g_spi_state=spi_rx_cmd;
-
 }
 
 //准备进入空闲
@@ -171,19 +172,20 @@ void spi_int_config(SPI_HandleTypeDef *hspi,void (*RxISR)(struct __SPI_HandleTyp
 	__to_spi_rx_cmd(hspi);
 	__HAL_SPI_ENABLE_IT(hspi, (SPI_IT_RXNE | SPI_IT_ERR));
 	__HAL_SPI_ENABLE(hspi);
+	__spi_idle();
 }
 
 static void __spi_busy(void)
 {
-	GPIOH->BSRR = (uint32_t)GPIO_PIN_14;
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_15;
 }
 
 static void __spi_idle(void)
 {
-	GPIOH->BSRR = (uint32_t)GPIO_PIN_14 << 16;
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_15 << 16;
 }
 
-void ready_to_read(void)
+static void ready_to_read(void)
 {
 	GPIOH->BSRR = (uint32_t)GPIO_PIN_14;
 	read_delay();

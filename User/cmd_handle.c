@@ -13,12 +13,12 @@
 NGVAM_MSG_TAB g_msg_tab;
 NGVAM_MSG_TAB *gp_msg_tab=&g_msg_tab;
 
-uint8_t g_rx_tab_a[10][120]={0};
-uint8_t g_rx_tab_p[10][120]={0};
+uint8_t g_rx_tab_tmp[10][120]={0};
 
+/*
 NGVAM_TABLE_RX_STATE g_rx_tab_a_sta=TABLE_RX_PROCESS;//flag of rx tab[a/p]
 NGVAM_TABLE_RX_STATE g_rx_tab_p_sta=TABLE_RX_PROCESS;
-
+*/
 
 static void __handle_play(void);
 static void __handle_tab(void);
@@ -99,46 +99,31 @@ static void __handle_tab(void)
 		default :break;
 	}*/
 
-	now_packet_cnt = gp_msg_tab->pid&0x0F;
-	all_packet_cnt = (gp_msg_tab->pid&0xF0)>>4;
+	now_packet_cnt = gp_msg_tab->packet_id&0x0F;
+	all_packet_cnt = (gp_msg_tab->packet_id&0xF0)>>4;
 	
 	if(now_packet_cnt <all_packet_cnt)// start mid
 	{
-		if(gp_msg_tab->table_type == TABLE_TYPE_AMPLITUDE)
-			{
-				memcpy(g_rx_tab_a[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
-
-			}
-		else if(gp_msg_tab->table_type == TABLE_TYPE_PHASE)
-		{
-			memcpy(g_rx_tab_p[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
-		}
+				memcpy(g_rx_tab_tmp[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
 	}
 
-	
 	else if(now_packet_cnt == all_packet_cnt)//end 
 	{
-		if(gp_msg_tab->table_type == TABLE_TYPE_AMPLITUDE)
-			{
-			memcpy(g_rx_tab_a[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
-
-			g_rx_tab_a_sta = TABLE_RX_COMPLETED;//tigger flag
-			}
+			memcpy(g_rx_tab_tmp[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
+			//to flash
+			//flash_clean(gp_msg_tab->freq,gp_msg_tab->channel);
 			
+			if(gp_msg_tab->table_type == TABLE_TYPE_AMPLITUDE)
+			{
+				flash_write_amplitude(gp_msg_tab->freq,gp_msg_tab->channel,(uint8_t *)g_rx_tab_tmp);
+			}
 			else if(gp_msg_tab->table_type == TABLE_TYPE_PHASE)
 			{
-				memcpy(g_rx_tab_p[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
-
-				g_rx_tab_p_sta = TABLE_RX_COMPLETED;
+				flash_write_phase(gp_msg_tab->freq,gp_msg_tab->channel,(uint8_t *)g_rx_tab_tmp);
 			}
 	}
 
-	if(g_rx_tab_a_sta == TABLE_RX_COMPLETED && g_rx_tab_a_sta == TABLE_RX_COMPLETED)
-	{
-		//to flash
-			flash_clean(gp_msg_tab->freq,gp_msg_tab->channel);
-			flash_write(gp_msg_tab->freq,gp_msg_tab->channel,(uint8_t *)g_rx_tab_a,(uint8_t *)g_rx_tab_p);
-	}
+
 	 
 }
 

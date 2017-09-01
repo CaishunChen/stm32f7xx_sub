@@ -49,7 +49,8 @@ void print_all_address(void);
 #endif
 uint32_t get_flash_address(uint8_t freq,uint8_t channel);
 QSPI_StaticTypeDef flash_read(uint8_t freq,uint8_t channel,uint8_t *p_a_data,uint8_t *p_p_data);
-QSPI_StaticTypeDef flash_write(uint8_t freq,uint8_t channel,uint8_t *p_a_data,uint8_t *p_p_data);
+QSPI_StaticTypeDef flash_write_phase(uint8_t freq,uint8_t channel,uint8_t *p_p_data);
+QSPI_StaticTypeDef flash_write_amplitude(uint8_t freq,uint8_t channel,uint8_t *p_a_data);
 QSPI_StaticTypeDef flash_clean(uint8_t freq,uint8_t channel);
 
 
