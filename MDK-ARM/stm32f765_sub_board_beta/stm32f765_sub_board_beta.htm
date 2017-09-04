@@ -3,7 +3,7 @@
 <title>Static Call Graph - [stm32f765_sub_board_beta\stm32f765_sub_board_beta.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image stm32f765_sub_board_beta\stm32f765_sub_board_beta.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Fri Sep 01 18:16:50 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Mon Sep 04 18:53:46 2017
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1059,8 +1059,8 @@ Global Symbols
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_SendCmdData
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_AutoPollingMemReady
 </UL>
-<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
+<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
 </UL>
 
 <P><STRONG><a name="[c9]"></a>QSPI_Quad_Enter</STRONG> (Thumb, 200 bytes, Stack size 56 bytes, bsp_mt25q.o(i.QSPI_Quad_Enter))
@@ -1116,8 +1116,8 @@ Global Symbols
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_SendCmdData
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_AutoPollingMemReady
 </UL>
-<BR>[Called By]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
+<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
 </UL>
 
 <P><STRONG><a name="[cf]"></a>SDRAM_Initialization_Sequence</STRONG> (Thumb, 168 bytes, Stack size 24 bytes, sdram_handle.o(i.SDRAM_Initialization_Sequence))
@@ -1268,14 +1268,14 @@ Global Symbols
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_flash_address
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_port6
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_ctrl_port6
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_all
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_all
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analyze_msg
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__to_spi_idle
 </UL>
 
-<P><STRONG><a name="[dd]"></a>__ARM_common_memcpy4_5</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, cmd_handle.o(i.__ARM_common_memcpy4_5))
+<P><STRONG><a name="[df]"></a>__ARM_common_memcpy4_5</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, cmd_handle.o(i.__ARM_common_memcpy4_5))
 <BR><BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analyze_msg
 </UL>
 
@@ -1285,25 +1285,25 @@ Global Symbols
 
 <P><STRONG><a name="[f9]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[da]"></a>__to_spi_idle</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, spi_handle.o(i.__to_spi_idle), UNUSED)
+<P><STRONG><a name="[da]"></a>__to_spi_idle</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, spi_handle.o(i.__to_spi_idle), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[db]"></a>analyze_msg</STRONG> (Thumb, 314 bytes, Stack size 24 bytes, cmd_handle.o(i.analyze_msg))
+<P><STRONG><a name="[db]"></a>analyze_msg</STRONG> (Thumb, 344 bytes, Stack size 24 bytes, cmd_handle.o(i.analyze_msg))
 <BR><BR>[Stack]<UL><LI>Max Depth = 328<LI>Call Chain = analyze_msg &rArr; flash_write_phase &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_all
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_convert_all
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_memcpy4_5
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_all
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_convert_all
+<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_phase
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_write_amplitude
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_memcpy4_5
 </UL>
 <BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_rx_isr
 </UL>
 
-<P><STRONG><a name="[df]"></a>flash_write_amplitude</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, flash_handle.o(i.flash_write_amplitude))
+<P><STRONG><a name="[e1]"></a>flash_write_amplitude</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, flash_handle.o(i.flash_write_amplitude))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = flash_write_amplitude &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1313,7 +1313,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analyze_msg
 </UL>
 
-<P><STRONG><a name="[de]"></a>flash_write_phase</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, flash_handle.o(i.flash_write_phase))
+<P><STRONG><a name="[e0]"></a>flash_write_phase</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, flash_handle.o(i.flash_write_phase))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = flash_write_phase &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1342,7 +1342,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[e0]"></a>gpio_convert_all</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, gpio_handle.o(i.gpio_convert_all))
+<P><STRONG><a name="[dd]"></a>gpio_convert_all</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, gpio_handle.o(i.gpio_convert_all))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = gpio_convert_all
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_convert_one
@@ -1351,7 +1351,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e4]"></a>gpio_convert_one</STRONG> (Thumb, 186 bytes, Stack size 0 bytes, gpio_handle.o(i.gpio_convert_one))
-<BR><BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_convert_all
+<BR><BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_convert_all
 </UL>
 
 <P><STRONG><a name="[73]"></a>main</STRONG> (Thumb, 252 bytes, Stack size 0 bytes, main.o(i.main))
@@ -1399,7 +1399,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[79]"></a>spi_rx_isr</STRONG> (Thumb, 378 bytes, Stack size 40 bytes, spi_handle.o(i.spi_rx_isr))
+<P><STRONG><a name="[79]"></a>spi_rx_isr</STRONG> (Thumb, 382 bytes, Stack size 40 bytes, spi_handle.o(i.spi_rx_isr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = spi_rx_isr &rArr; analyze_msg &rArr; flash_write_phase &rArr; QSPI_WriteBuff &rArr; QSPI_AutoPollingMemReady &rArr; QSPI_SendCmdData &rArr; HAL_QSPI_Transmit &rArr; QSPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1407,7 +1407,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[e1]"></a>sync_ctrl_all</STRONG> (Thumb, 188 bytes, Stack size 16 bytes, gpio_handle.o(i.sync_ctrl_all))
+<P><STRONG><a name="[de]"></a>sync_ctrl_all</STRONG> (Thumb, 188 bytes, Stack size 16 bytes, gpio_handle.o(i.sync_ctrl_all))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = sync_ctrl_all &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1458,7 +1458,7 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = __delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_ctrl_all
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_all
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sync_ctrl_all
 </UL>
 
 <P><STRONG><a name="[c5]"></a>QSPI_AutoPollingMemReady</STRONG> (Thumb, 120 bytes, Stack size 64 bytes, bsp_mt25q.o(i.QSPI_AutoPollingMemReady))

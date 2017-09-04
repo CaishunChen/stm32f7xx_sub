@@ -56,7 +56,7 @@ void analyze_msg(void)//analyze msg and return to spi_idle
 		
 		default :
 		{
-			DBG_LOG(("msg tyoe err\r\n"));
+			DBG_LOG(("msg type err\r\n"));
 			break;
 		}
 		
@@ -79,8 +79,6 @@ static void __handle_play(void)
 	}
 	gpio_convert_all();
 	sync_ctrl_all();
-	__HAL_SPI_ENABLE_IT(&hspi2, (SPI_IT_RXNE | SPI_IT_ERR));
-	__HAL_SPI_ENABLE(&hspi2);
 	//__to_spi_rx_cmd(&hspi2);
 
 }
@@ -91,36 +89,32 @@ static void __handle_tab(void)
 	uint8_t now_packet_cnt,all_packet_cnt;
 	DBG_LOG(("__handle_tab\r\n"));
 	memcpy(gp_msg_tab,gp_msg->msg_ptr,5);
-	/*switch(gp_msg_tab->segment)
-	{
-		case segment_start :break;
-		case segment_middle :break;
-		case segment_end :break;
-		default :break;
-	}*/
 
 	now_packet_cnt = gp_msg_tab->packet_id&0x0F;
 	all_packet_cnt = (gp_msg_tab->packet_id&0xF0)>>4;
+	DBG_LOG(("(%d/%d)\r\n",now_packet_cnt,all_packet_cnt));
 	
 	if(now_packet_cnt <all_packet_cnt)// start mid
 	{
-				memcpy(g_rx_tab_tmp[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
+		memcpy(g_rx_tab_tmp[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
+				
 	}
 
 	else if(now_packet_cnt == all_packet_cnt)//end 
 	{
-			memcpy(g_rx_tab_tmp[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
-			//to flash
-			//flash_clean(gp_msg_tab->freq,gp_msg_tab->channel);
-			
-			if(gp_msg_tab->table_type == TABLE_TYPE_AMPLITUDE)
-			{
-				flash_write_amplitude(gp_msg_tab->freq,gp_msg_tab->channel,(uint8_t *)g_rx_tab_tmp);
-			}
-			else if(gp_msg_tab->table_type == TABLE_TYPE_PHASE)
-			{
-				flash_write_phase(gp_msg_tab->freq,gp_msg_tab->channel,(uint8_t *)g_rx_tab_tmp);
-			}
+		memcpy(g_rx_tab_tmp[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
+		//to flash
+		//flash_clean(gp_msg_tab->freq,gp_msg_tab->channel);
+		
+		if(gp_msg_tab->table_type == TABLE_TYPE_AMPLITUDE)
+		{
+			DBG_LOG(("write amplitude to flash,f:%dch:%d,type%d\r\n",gp_msg_tab->freq,gp_msg_tab->channel,gp_msg_tab->table_type));
+			flash_write_amplitude(gp_msg_tab->freq,gp_msg_tab->channel,(uint8_t *)g_rx_tab_tmp);
+		}
+		else if(gp_msg_tab->table_type == TABLE_TYPE_PHASE)
+		{
+			flash_write_phase(gp_msg_tab->freq,gp_msg_tab->channel,(uint8_t *)g_rx_tab_tmp);
+		}
 	}
 
 

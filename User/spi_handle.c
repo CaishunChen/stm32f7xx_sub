@@ -63,7 +63,7 @@ void spi_rx_isr(SPI_HandleTypeDef *hspi)
 static void __handle_spi_idle(SPI_HandleTypeDef *hspi)
 {
 	uint8_t i=0;
-	DBG_LOG(("__handle_spi2_idle\r\n"));
+	//DBG_LOG(("__handle_spi2_idle\r\n"));
 	for(i=0;i<hspi->RxXferSize;i++)
 	{
 		DBG_LOG((" %.2X",g_spi_rx_buffer[i]));
@@ -71,17 +71,20 @@ static void __handle_spi_idle(SPI_HandleTypeDef *hspi)
 	analyze_msg();
 	__spi_idle();
 	__to_spi_rx_cmd(hspi);
+	__HAL_SPI_ENABLE_IT(&hspi2, (SPI_IT_RXNE | SPI_IT_ERR));
+	__HAL_SPI_ENABLE(&hspi2);
 	//while(1);
 }
 
 static void __handle_spi_rx_data(SPI_HandleTypeDef *hspi)
 {
 	//DBG_LOG(("__handle_spi2_rx_data\r\n"));
-	//DBG_LOG(("%d %d",hspi->RxXferCount,hspi->RxXferSize));
+//	DBG_LOG(("%d->%d\r",hspi->RxXferCount,hspi->RxXferSize));
 	if(hspi->RxXferCount < hspi->RxXferSize)
 	{
 		*(hspi->pRxBuffPtr++)=*((__IO uint8_t *)&SPI2->DR);//get data
 		hspi->RxXferCount++;
+		//DBG_LOG(("*"));
 	}
 	if(hspi->RxXferCount == hspi->RxXferSize)
 	{
@@ -111,15 +114,15 @@ static void __handle_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 	if(hspi->RxXferCount == 5)//
 	{
 		//check
-		DBG_LOG(("check head\r\n"));
+		//DBG_LOG(("check head\r\n"));
 		if(*gp_rx_u16 == 0x5A5A)
 		{
 			gp_msg->msg_len = *(gp_rx_u16 + 1);//len
 			if(gp_msg->msg_len >255) gp_msg->msg_len = 255;//limit len 
 			gp_msg->msg_type = *(gp_rx_u8 + 4);//type
 			gp_msg->msg_ptr = g_spi_rx_buffer;
-			DBG_LOG(("%d-%X\r\n",gp_msg->msg_len,gp_msg->msg_type));
-			DBG_LOG(("__handle_spi2_rx_cmd_completed,to rec data\r\n"));
+			//DBG_LOG(("%d-%X\r\n",gp_msg->msg_len,gp_msg->msg_type));
+//			DBG_LOG(("__handle_spi2_rx_cmd_completed,to rec data\r\n"));
 			__to_spi_rx_data(hspi);
 		}
 		else
@@ -141,8 +144,9 @@ static void __handle_spi_reply(SPI_HandleTypeDef *hspi)
 //准备接收数据
 void __to_spi_rx_data(SPI_HandleTypeDef *hspi)
 {
+	//DBG_LOG(("__to_spi2_rx_data\r\n"));
 	hspi->RxXferCount=0;
-	hspi->RxXferSize=(gp_msg->msg_len)+7;
+	hspi->RxXferSize=(gp_msg->msg_len)+5;
 	hspi->pRxBuffPtr=g_spi_rx_buffer;
 	g_spi_state=spi_rx_data;
 }
@@ -159,9 +163,10 @@ void __to_spi_rx_cmd(SPI_HandleTypeDef *hspi)
 //准备进入空闲
 void __to_spi_idle(SPI_HandleTypeDef *hspi)
 {
-	DBG_LOG(("__to_spi2_idle\r\n"));
+	
 	__HAL_SPI_DISABLE_IT(hspi, (SPI_IT_RXNE | SPI_IT_ERR));
 	__HAL_SPI_DISABLE(hspi);
+	DBG_LOG(("__to_spi2_idle\r\n"));
 	g_spi_state = spi_idle;
 }
 
@@ -187,6 +192,7 @@ static void __spi_idle(void)
 
 static void ready_to_read(void)
 {
+	SPI2->DR =0xAA;//
 	GPIOH->BSRR = (uint32_t)GPIO_PIN_14;
 	read_delay();
 	GPIOH->BSRR = (uint32_t)GPIO_PIN_14 << 16;
