@@ -122,14 +122,14 @@ void sync_ctrl_port6(void)
 {
 	GPIOI->ODR=CTRL_MASK&g_gpio_ctrl_table[5];
 	if(g_gpio_ctrl_table[5]&0x04) GPIOE->BSRR= GPIO_PIN_2;else GPIOE->BSRR= (uint32_t)GPIO_PIN_2<< 16;
-	if(g_gpio_ctrl_table[5]&0x10) GPIOE->BSRR= GPIO_PIN_4;else GPIOE->BSRR= (uint32_t)GPIO_PIN_4<< 16;
+	if(g_gpio_ctrl_table[5]&0x08) GPIOE->BSRR= GPIO_PIN_4;else GPIOE->BSRR= (uint32_t)GPIO_PIN_4<< 16;
 	DBG_LOG(("GPIOI output %.4X\r\n",CTRL_MASK&g_gpio_ctrl_table[5]));
 }
 void reset_ctrl_port6(void)
 {
 	GPIOI->ODR=CTRL_MASK&gpio_ctrl_table_reset[5];
 	if(g_gpio_ctrl_table[5]&0x04) GPIOE->BSRR= GPIO_PIN_2;else GPIOE->BSRR= (uint32_t)GPIO_PIN_2<< 16;
-	if(g_gpio_ctrl_table[5]&0x10) GPIOE->BSRR= GPIO_PIN_4;else GPIOE->BSRR= (uint32_t)GPIO_PIN_4<< 16;
+	if(g_gpio_ctrl_table[5]&0x08) GPIOE->BSRR= GPIO_PIN_4;else GPIOE->BSRR= (uint32_t)GPIO_PIN_4<< 16;
 	DBG_LOG(("GPIOI reset %.4X\r\n",CTRL_MASK&gpio_ctrl_table_reset[5]));
 }
 
@@ -161,7 +161,7 @@ void gpio_convert_all(void)
 	for(i=0;i<8;i++)
 	{
 		gpio_convert_one(&g_gpio_ctrl_table_raw[i],&g_gpio_ctrl_table[i]);
-		//DBG_LOG(("now g_gpio_ctrl_table[%d] is %.4X \r\n",i,g_gpio_ctrl_table[i]));
+		DBG_LOG(("now g_gpio_ctrl_table[%d] is %.4X \r\n",i,g_gpio_ctrl_table[i]));
 	}
 }
 
@@ -233,5 +233,24 @@ void sync_ctrl_all(void)
 	DBG_LOG(("all ctrl are update\r\n"));
 }
 
-
+void all_gpio_self_test(void)
+{
+	uint32_t i,j;
+	uint32_t a_temp[]={16000,500,2000,31500,4000,1000,8000,0,0};
+	uint32_t p_temp[]={90000,22500,11250,5625,45000,180000,0,0,0};
+	DBG_LOG(("start self test--------------------------------\r\n"));
+	for(j=0;j<9;j++)
+	{
+		for(i=0;i<8;i++)
+		{
+			g_gpio_ctrl_table_raw[i].a = a_temp[j];//inc
+			g_gpio_ctrl_table_raw[i].p = p_temp[j];//inc
+		}
+		DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
+		gpio_convert_all();
+		sync_ctrl_all();
+		HAL_Delay(500);
+	}
+	DBG_LOG(("end self test--------------------------------\r\n"));
+}
 

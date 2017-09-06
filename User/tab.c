@@ -12,8 +12,8 @@
 AmplitudeDataTypeDef g_amplitude_tab[8][128]={0};
 PhaseDataTypeDef g_phase_tab[8][64]={0};
 
-AmplitudeDataTypeDef *g_ptra;
-PhaseDataTypeDef *g_ptrp;
+AmplitudeDataTypeDef *g_ptra = g_amplitude_tab[0];/////0905 add 
+PhaseDataTypeDef *g_ptrp = g_phase_tab[0];
 
 volatile  uint32_t g_acnt = 0;
 volatile uint32_t g_pcnt = 0;
@@ -31,15 +31,16 @@ void tab_init(void)
 			g_amplitude_tab[i][j].stand_val = g_acnt;
 			g_amplitude_tab[i][j].actual_val = g_acnt+3;
 			g_amplitude_tab[i][j].calibration_val = 0;//g_acnt+1;
-			g_acnt += 100;
+			g_acnt += 500;
 		}
 		for(j=0;j<64;j++)
 		{
 			g_phase_tab[i][j].stand_val = g_pcnt;
 			g_phase_tab[i][j].actual_val = g_pcnt+3;
 			g_phase_tab[i][j].calibration_val = 0;//g_pcnt+4;
-			g_pcnt += 100;
+			g_pcnt += 5625;
 		}
+
 			
 	}
 }

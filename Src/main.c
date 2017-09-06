@@ -78,10 +78,8 @@ static void MX_NVIC_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-uint8_t t[128]={5};
-uint8_t r[128]={0};
-uint8_t t1[64]={3};
-uint8_t r1[64]={0};
+uint8_t t[384]={5};
+uint8_t r[384]=0;
 /* USER CODE END 0 */
 
 int main(void)
@@ -143,13 +141,16 @@ int main(void)
 	
   DBG_LOG(("sys init ok\r\n"));
 	
-	//print_all_address();
-	
-	spi_int_config(&hspi2,spi_rx_isr);
+	print_all_address();
+	tab_init();
 
-	
+	all_gpio_self_test();
 	reset_ctrl_all();
+	spi_int_config(&hspi2,spi_rx_isr);
 	HAL_Delay(800);
+	
+	//flash_write_amplitude();
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -159,8 +160,13 @@ int main(void)
   /* USER CODE END WHILE */
 		
 	/* USER CODE BEGIN 3 */
+//	GPIOH->BSRR = (uint32_t)GPIO_PIN_14;
+//	GPIOH->BSRR = (uint32_t)GPIO_PIN_15 << 16;
+//  	HAL_Delay(10);
 
-		//HAL_Delay(10000);
+//	GPIOH->BSRR = (uint32_t)GPIO_PIN_14 << 16;
+//	GPIOH->BSRR = (uint32_t)GPIO_PIN_15;
+	HAL_Delay(10);
 
   }
   /* USER CODE END 3 */

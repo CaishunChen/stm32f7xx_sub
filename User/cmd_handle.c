@@ -66,6 +66,7 @@ void analyze_msg(void)//analyze msg and return to spi_idle
 static void __handle_play(void)
 {
 	uint16_t i=0;
+	uint32_t a_out,p_out;
 	
 	#ifdef DEBUG
 	uint32_t *p=(uint32_t *)g_gpio_ctrl_table_raw;//-
@@ -73,10 +74,18 @@ static void __handle_play(void)
 	
 	DBG_LOG(("__handle_play\r\n"));
 	memcpy(g_gpio_ctrl_table_raw,gp_msg->msg_ptr+5,64);
-	for(i=0;i<16;i++)
+	for(i=0;i<8;i++)
 	{
-		DBG_LOG(("%.2d:%.8X\r\n",i,*p++));
+		DBG_LOG(("a%.2d:%.6d\t\t",i,*p++));
+		DBG_LOG(("p%.2d:%.6d\r\n",i,*p++));
 	}
+
+
+	/*for(i=0;i<8;i++)
+	{
+		search_1ch(0,1000,2000,&a_out,&p_out);
+	}*/
+	
 	gpio_convert_all();
 	sync_ctrl_all();
 	//__to_spi_rx_cmd(&hspi2);
@@ -96,8 +105,7 @@ static void __handle_tab(void)
 	
 	if(now_packet_cnt <all_packet_cnt)// start mid
 	{
-		memcpy(g_rx_tab_tmp[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);
-				
+		memcpy(g_rx_tab_tmp[now_packet_cnt],gp_msg->msg_ptr+5,gp_msg->msg_len);		
 	}
 
 	else if(now_packet_cnt == all_packet_cnt)//end 

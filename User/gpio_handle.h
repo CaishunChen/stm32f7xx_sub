@@ -35,7 +35,7 @@ void reset_ctrl_all(void);
 void gpio_convert_all(void);
 void gpio_convert_one(type_gpio_ctrl *sdat,uint16_t *ddat);
 void sync_ctrl_all(void);
-
+void all_gpio_self_test(void);
 
 
 
