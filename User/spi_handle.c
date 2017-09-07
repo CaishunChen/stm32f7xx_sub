@@ -70,7 +70,7 @@ static void __handle_spi_idle(SPI_HandleTypeDef *hspi)
 	}
 	analyze_msg();
 	__spi_idle();
-	//ready_to_read();
+	ready_to_read();
 	DBG_LOG(("ready to read\r\n"));
 	__to_spi_rx_cmd(hspi);
 	__HAL_SPI_ENABLE_IT(&hspi2, (SPI_IT_RXNE | SPI_IT_ERR));
@@ -184,21 +184,21 @@ void spi_int_config(SPI_HandleTypeDef *hspi,void (*RxISR)(struct __SPI_HandleTyp
 
 static void __spi_busy(void)
 {
-	GPIOH->BSRR = (uint32_t)GPIO_PIN_15;
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_14;
 }
 
 static void __spi_idle(void)
 {
-	GPIOH->BSRR = (uint32_t)GPIO_PIN_15 << 16;
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_14 << 16;
 }
 
 static void ready_to_read(void)
 {
-	SPI2->DR =0x11;//
-	GPIOH->BSRR = (uint32_t)GPIO_PIN_14;
+	//SPI2->DR =0x11;//
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_15;
 	read_delay();
-	GPIOH->BSRR = (uint32_t)GPIO_PIN_14 << 16;
-	SPI2->DR =0x77;
+	GPIOH->BSRR = (uint32_t)GPIO_PIN_15 << 16;
+	//SPI2->DR =0x0;
 }
 
 static void read_delay(void)

@@ -73,6 +73,14 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+  /**/
+  __HAL_RCC_GPIOK_CLK_ENABLE();
+  /**/
+
+
+  /**/
+  HAL_GPIO_WritePin(GPIOK, GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
+  /**/
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(FLASH_RESET_GPIO_Port, FLASH_RESET_Pin|GPIO_PIN_2|GPIO_PIN_4, GPIO_PIN_SET);//e2 e4 to replace i2i3
@@ -84,6 +92,8 @@ void MX_GPIO_Init(void)
 
 	//-----------------------------------------add disable spi2 remap------------------------------
 //	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
+
+
 
 
 	
@@ -107,12 +117,23 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
 //  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_14, GPIO_PIN_RESET);//int 2
-	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_15, GPIO_PIN_SET);//int1
+	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_15, GPIO_PIN_RESET);//int 2
+	HAL_GPIO_WritePin(GPIOH, GPIO_PIN_14, GPIO_PIN_SET);//int1
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8 
                           |GPIO_PIN_9, GPIO_PIN_RESET);
+
+
+  /**/
+  /*Configure GPIO pin : Pk */
+  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
+
+  /**/
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = FLASH_RESET_Pin|GPIO_PIN_2|GPIO_PIN_4;

@@ -166,7 +166,8 @@ int main(void)
 
 //	GPIOH->BSRR = (uint32_t)GPIO_PIN_14 << 16;
 //	GPIOH->BSRR = (uint32_t)GPIO_PIN_15;
-	HAL_Delay(10);
+	//DBG_LOG(("\r\n"));
+	HAL_Delay(500);
 
   }
   /* USER CODE END 3 */

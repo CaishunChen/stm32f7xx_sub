@@ -18,11 +18,12 @@ type_gpio_ctrl g_gpio_ctrl_table_raw[8]={0};
 static void __set_bit(uint16_t *val,uint16_t bit);
 static void __clr_bit(uint16_t *val,uint16_t bit);
 static __IO void __delay(void);
+void gpio_convert_ch4(type_gpio_ctrl *sdat,uint16_t *ddat);
 
 
 static __IO void __delay(void)
 {
-	__IO uint32_t i=0x100;//0x100 1us 
+	__IO uint32_t i=0xF00;//0x100 1us 
 	while(i--);
 }
 
@@ -40,6 +41,8 @@ static void __clr_bit(uint16_t *val,uint16_t bit)
 void sync_ctrl_port1(void)
 {
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[0];
+	if(g_gpio_ctrl_table[0] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[0] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_5;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_5 << 16;//reset
@@ -48,6 +51,8 @@ void sync_ctrl_port1(void)
 void reset_ctrl_port1(void)
 {	
 	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[0];
+	if(g_gpio_ctrl_table[0] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[0] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_5;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_5 << 16;//reset
@@ -57,6 +62,8 @@ void reset_ctrl_port1(void)
 void sync_ctrl_port2(void)
 {
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[1];
+	if(g_gpio_ctrl_table[1] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[1] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_6;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_6 << 16;//reset
@@ -64,6 +71,8 @@ void sync_ctrl_port2(void)
 void reset_ctrl_port2(void)
 {
 	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[1];
+	if(g_gpio_ctrl_table[1] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[1] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_6;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_6 << 16;//reset
@@ -73,6 +82,8 @@ void reset_ctrl_port2(void)
 void sync_ctrl_port3(void)
 {
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[2];
+	if(g_gpio_ctrl_table[2] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[2] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_7;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_7 << 16;//reset
@@ -80,6 +91,8 @@ void sync_ctrl_port3(void)
 void reset_ctrl_port3(void)
 {
 	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[2];
+	if(g_gpio_ctrl_table[2] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[2] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_7;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_7 << 16;//reset
@@ -89,6 +102,8 @@ void reset_ctrl_port3(void)
 void sync_ctrl_port4(void)
 {
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[3];
+	if(g_gpio_ctrl_table[3] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[3] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_8;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_8 << 16;//reset
@@ -96,6 +111,8 @@ void sync_ctrl_port4(void)
 void reset_ctrl_port4(void)
 {
 	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[3];
+	if(g_gpio_ctrl_table[3] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[3] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_8;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_8 << 16;//reset
@@ -105,6 +122,8 @@ void reset_ctrl_port4(void)
 void sync_ctrl_port5(void)
 {
 	GPIOA->ODR=CTRL_MASK&g_gpio_ctrl_table[4];
+	if(g_gpio_ctrl_table[4] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[4] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_9;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_9 << 16;//reset
@@ -112,6 +131,8 @@ void sync_ctrl_port5(void)
 void reset_ctrl_port5(void)
 {
 	GPIOA->ODR=CTRL_MASK&gpio_ctrl_table_reset[4]; 
+	if(g_gpio_ctrl_table[4] & GPIO_PIN_11)GPIOK->BSRR= GPIO_PIN_6;else GPIOK->BSRR= (uint32_t)GPIO_PIN_6<< 16;
+	if(g_gpio_ctrl_table[4] & GPIO_PIN_12)GPIOK->BSRR= GPIO_PIN_7;else GPIOK->BSRR= (uint32_t)GPIO_PIN_7<< 16;
 	GPIOB->BSRR = GPIO_PIN_9;//set
 	__delay();
 	GPIOB->BSRR = (uint32_t)GPIO_PIN_9 << 16;//reset
@@ -159,10 +180,13 @@ void gpio_convert_all(void)
 	uint8_t i=0;
 	
 	for(i=0;i<8;i++)
-	{
+	{	
+		if(i == 3)continue;
 		gpio_convert_one(&g_gpio_ctrl_table_raw[i],&g_gpio_ctrl_table[i]);
 		DBG_LOG(("now g_gpio_ctrl_table[%d] is %.4X \r\n",i,g_gpio_ctrl_table[i]));
 	}
+	gpio_convert_ch4(&g_gpio_ctrl_table_raw[3],&g_gpio_ctrl_table[3]);
+	DBG_LOG(("now g_gpio_ctrl_table[3] is %.4X \r\n",g_gpio_ctrl_table[3]));
 }
 
 void gpio_convert_one(type_gpio_ctrl *sdat,uint16_t *ddat)
@@ -201,6 +225,45 @@ void gpio_convert_one(type_gpio_ctrl *sdat,uint16_t *ddat)
 	*ddat=res;
 	
 }
+
+
+void gpio_convert_ch4(type_gpio_ctrl *sdat,uint16_t *ddat)
+{
+	//sdat.a  sdat.p 
+	// 	00		V1  	V2  	V3  	V4 		V5 		V6 		V1 		V2 		V3  		V4 		V5  	V6 
+	//bit 		1			2			3			4			5			6			7			8			9				10		11		12	 
+	//raw		16		0.5			2			-------------------31.5------------		4			1			8	
+	//cal		16000	500			2000	------------------31500------------		4000	1000	8000
+	//ctr_bit	11		10		9			-------------------12--------------		2			1			0	(1 1100 0000 1111B)													
+	uint32_t temp_a=sdat->a;
+	uint32_t temp_p=sdat->p;
+	uint16_t res=0x01F8;
+
+
+	if(temp_a >= 31500)	{temp_a -=31500;__set_bit(&res,12);}//DBG_LOG(("\t\t\tset bit12\r\n"));}
+	if(temp_a >= 16000)	{temp_a -=16000;__set_bit(&res,0);}
+	if(temp_a >= 8000)	{temp_a -=8000;	__set_bit(&res,10);}
+	if(temp_a >= 4000)	{temp_a -=4000;	__set_bit(&res,9);}
+	if(temp_a >= 2000)	{temp_a -=2000;	__set_bit(&res,2);}
+	if(temp_a >= 1000)	{temp_a -=1000;	__set_bit(&res,11);}
+	if(temp_a >= 500)	  {temp_a -=500;	__set_bit(&res,1);}
+
+
+	//bit 			1A			2A		3A		4A		5A		6A		//B = !A
+	//RAW				180			45		5.625	11.25	22.5	90
+	//cal				180000	45000	5625	11250	22500	90000
+	//ctrl_bit	8				7			6			5			4			3	
+	if(temp_p >= 180000){temp_p -= 180000;__clr_bit(&res,8);}
+	if(temp_p >= 90000)	{temp_p -= 90000;__clr_bit(&res,3);}
+	if(temp_p >= 45000)	{temp_p -= 45000;__clr_bit(&res,7);}
+	if(temp_p >= 22500)	{temp_p -= 22500;__clr_bit(&res,4);}
+	if(temp_p >= 11250)	{temp_p -= 11250;__clr_bit(&res,5);}
+	if(temp_p >= 5625)	{temp_p -=  5625;__clr_bit(&res,6);}
+	
+	*ddat=res;
+	
+}
+
 
 void reset_ctrl_all(void)
 {
@@ -249,7 +312,7 @@ void all_gpio_self_test(void)
 		DBG_LOG(("a is :%d,p is :%d\r\n",g_gpio_ctrl_table_raw[0].a,g_gpio_ctrl_table_raw[0].p));
 		gpio_convert_all();
 		sync_ctrl_all();
-		HAL_Delay(500);
+		HAL_Delay(800);
 	}
 	DBG_LOG(("end self test--------------------------------\r\n"));
 }
